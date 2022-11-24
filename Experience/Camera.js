@@ -17,11 +17,10 @@ export default class Camera {
         
         
         this.setControl();
-        
         console.log("dev ",this.experience.dev)
         if(this.experience.dev==1){
             
-            this.debug()
+            //this.debug()
             this.scene.add(
                 new THREE.GridHelper(20,20),
                 new THREE.AxesHelper(5));
@@ -48,16 +47,16 @@ export default class Camera {
     createPerspectiveCamera() {
         this.perspectiveCamera = new THREE.PerspectiveCamera(18, this.sizes.aspect, 0.1, 1000);
         this.scene.add(this.perspectiveCamera);
-        this.perspectiveCamera.position.set(-4.11,7.0899, -2.5);
+        this.perspectiveCamera.position.set(-4.11,3, -2.5);
       
 
     }
     setControl() {
         this.controls = new OrbitControls(this.perspectiveCamera, this.canvas);
-        
         this.controls.target= this.target;
         //this.controls.object.lookAt(this.target)
-        this.controls.update();
+        this.update();
+        console.log('set control ',this.controls);
         //this.controls.object.updateProjectionMatrix();
         
     }
@@ -78,19 +77,32 @@ export default class Camera {
     }
 
     update() {
+      
+        this.controls.update();
+        //this.debug();
+        
+    }
 
-        //this.controls.update();
+    initDebug(){
+        this.debugD = {};
+        this.debugD.geometry = new THREE.BoxGeometry();
+        this.debugD.material = new THREE.MeshBasicMaterial({color: 0x00ff00});
+        this.debugD.cube = new THREE.Mesh(this.debugD.geometry, this.debugD.material);
+        this.debugD.cube2 = new THREE.Mesh(this.debugD.geometry, this.debugD.material);
+        this.scene.add(this.debugD.cube,this.debugD.cube2);
         
     }
 
     debug(){
-        const geometry = new THREE.BoxGeometry();
-        const material = new THREE.MeshBasicMaterial({color: 0x00ff00});
-        const cube = new THREE.Mesh(geometry, material);
-        const cube2 = new THREE.Mesh(geometry, material);
-        this.scene.add(cube,cube2);
-        cube.position.set(this.target.x, this.target.y, this.target.z);
+        if (!this.debugD){
+            console.log('init');
+            this.initDebug();
+            this.debugD.init = true;
+        }
+        this.debugD.cube.position.set(this.target.x, this.target.y, this.target.z);
         console.log("Position: ",this.controls);
-        cube2.position.set(this.perspectiveCamera.position.x, this.perspectiveCamera.position.y, this.perspectiveCamera.position.z);
+        console.log('Target: ',this.controls.target);
+        console.log('Controls: ',this.controls);
+        this.debugD.cube2.position.set(this.perspectiveCamera.position.x, this.perspectiveCamera.position.y, this.perspectiveCamera.position.z);
     }
 }

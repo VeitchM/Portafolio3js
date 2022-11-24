@@ -12,7 +12,7 @@ export default class Lighting {
         this.sunLight.shadow.camera.far = 200;
         this.sunLight.shadow.mapSize.set(1024,1024);
         this.sunLight.shadow.normalBias = 0.05
-        this.scene.position.set(0,10,0)
+        //this.scene.position.set(0,10,0)
 
         this.scene.add(this.sunLight)
         console.log("SunLight")
