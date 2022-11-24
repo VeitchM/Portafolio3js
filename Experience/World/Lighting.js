@@ -6,13 +6,24 @@ export default class Lighting {
         this.experience = Experience.getInstance();
         this.scene = this.experience.scene;
         this.resources = this.experience.resources;
-        
-        this.sunLight = new THREE.DirectionalLight("#ffffff",3)
+
+        this.sunLight = new THREE.DirectionalLight("#ffffff", 3)
         this.sunLight.castShadow = true;
-        this.sunLight.shadow.camera.far = 200;
-        this.sunLight.shadow.mapSize.set(1024,1024);
+        this.sunLight.shadow.camera.far = 20;
+        this.sunLight.shadow.mapSize.set(1024, 1024);
         this.sunLight.shadow.normalBias = 0.05
-        //this.scene.position.set(0,10,0)
+        this.sunLight.shadow.camera.bottom = -10
+        this.sunLight.shadow.camera.height = 1000
+        this.sunLight.position.set(-5, 7, 3);
+        const targetSunLight = new THREE.Object3D();
+        targetSunLight.position.set(0, 0, 1);
+        this.scene.add(targetSunLight);
+
+        this.sunLight.target = targetSunLight;
+
+        const helper = new THREE.CameraHelper(this.sunLight.shadow.camera)
+        this.scene.add(helper)
+
 
         this.scene.add(this.sunLight)
         console.log("SunLight")

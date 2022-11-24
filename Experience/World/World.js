@@ -1,6 +1,7 @@
 import * as THREE from "three";
 import Experience from "../Experience.js";
 import Corridor from './Corridor'
+import Lighting from "./Lighting"
 
 export default class World {
     constructor() {
@@ -13,6 +14,7 @@ export default class World {
         this.resources.on("assetsLoaded", ()=> {
             this.corridor = new Corridor()
         })
+        this.lighting = new Lighting();
         console.log(this.scene)
 
     }

@@ -8,7 +8,7 @@ import Camera from "./Camera"
 import Renderer from "./Renderer"
 import Time from "./Utils/Time"
 import World from "./World/World"
-import Lighting from "./World/Lighting"
+
 
 
 
@@ -34,7 +34,7 @@ export default class Experience {
         this.camera = new Camera();
         this.renderer = new Renderer();
         
-        this.lighting = new Lighting();
+        
         
         this.world = new World();
         
@@ -63,7 +63,7 @@ export default class Experience {
         //this.preloader.update();
         //this.world.update();
         this.renderer.update();
-        //this.camera.update();
+        this.camera.update();
 
         //this.renderer.render(this.scene, this.camera.perspectiveCamera);
 
