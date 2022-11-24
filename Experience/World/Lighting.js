@@ -12,11 +12,10 @@ export default class Lighting {
         this.sunLight.shadow.camera.far = 20;
         this.sunLight.shadow.mapSize.set(1024, 1024);
         this.sunLight.shadow.normalBias = 0.05
-        this.sunLight.shadow.camera.bottom = -10
-        this.sunLight.shadow.camera.height = 1000
-        this.sunLight.position.set(-5, 7, 3);
+        this.sunLight.shadow.camera.bottom = -5
+        this.sunLight.position.set(-10, 7, 3);
         const targetSunLight = new THREE.Object3D();
-        targetSunLight.position.set(0, 0, 1);
+        targetSunLight.position.set(-5, 0, 1);
         this.scene.add(targetSunLight);
 
         this.sunLight.target = targetSunLight;
