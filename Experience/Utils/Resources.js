@@ -31,12 +31,12 @@ export default class Resources extends EventEmitter {
     }
     
     startLoading() {
-        console.log("resources set Loaders")
+        //console.log("resources set Loaders")
         for (const asset of this.assets) {
             if (asset.type == "glbModel") {
                 this.loaders.gltfLoader.load(asset.path, (file) => {
                     this.singleAssetLoaded(asset, file);
-                    console.log("Loaded " ,asset.name)
+                    //console.log("Loaded " ,asset.name)
                 })
             }
             //can add others types of files here

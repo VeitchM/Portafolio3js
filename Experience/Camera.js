@@ -6,7 +6,7 @@ import { Vector3 } from "three";
 
 export default class Camera {
     constructor() {
-        this.target = new THREE.Vector3(-6.2,1.5, 4)
+        this.target = new THREE.Vector3(-7,1.0, 5)
         this.experience = Experience.getInstance();
         this.sizes = this.experience.sizes;
         this.scene = this.experience.scene;
@@ -47,7 +47,7 @@ export default class Camera {
     createPerspectiveCamera() {
         this.perspectiveCamera = new THREE.PerspectiveCamera(18, this.sizes.aspect, 0.1, 1000);
         this.scene.add(this.perspectiveCamera);
-        this.perspectiveCamera.position.set(-4.11,3, -2.5);
+        this.perspectiveCamera.position.set(-4.11,5, -2.5);
       
 
     }

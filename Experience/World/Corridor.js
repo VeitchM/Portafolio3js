@@ -12,10 +12,7 @@ export default class Corridor {
 
         this.scene.add(this.corridor.scene)
 
-        const geometry = new THREE.BoxGeometry();
-        const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
-        const cube = new THREE.Mesh(geometry, material);
-        //this.scene.add(cube);
+      
 
         console.log("cube")
         console.log('Corridor: ', this.corridor)

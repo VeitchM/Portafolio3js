@@ -23,7 +23,7 @@ export default class Experience {
     constructor(canvas) {
         Experience.instance = this;
         
-        this.dev = 1;
+        this.dev = 0;
 
         
         this.resources = new Resources(assets);
