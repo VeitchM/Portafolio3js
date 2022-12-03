@@ -3,6 +3,10 @@ import Experience from "./Experience.js";
 
 export default class Renderer {
     constructor() {
+
+        // TO DO TODO Apply unreal bloom pass
+        //https://threejs.org/examples/webgl_postprocessing_unreal_bloom.html
+        // https://www.youtube.com/watch?v=ZtK70Tb9uqg
         this.experience = Experience.getInstance();
         this.sizes = this.experience.sizes;
         this.scene = this.experience.scene;
@@ -38,7 +42,8 @@ export default class Renderer {
 
     update() {
         // this.renderer.setViewport(0, 0, this.sizes.width, this.sizes.height);
-        this.renderer.render(this.scene, this.camera.perspectiveCamera);
+        //console.log("El ultimo ", this.camera.activeCamera);
+        this.renderer.render(this.scene, this.camera.activeCamera);
         // Second Screen
         // this.renderer.setScissorTest(true);
         // this.renderer.setViewport(
@@ -55,7 +60,7 @@ export default class Renderer {
         //     this.sizes.height / 3
         // );
 
-        // this.renderer.render(this.scene, this.camera.perspectiveCamera);
+    
 
         // this.renderer.setScissorTest(false);
     }

@@ -6,8 +6,11 @@ import assets from "./Utils/assets"
 
 import Camera from "./Camera"
 import Renderer from "./Renderer"
+import Controls from "./Controls"
+
 import Time from "./Utils/Time"
 import World from "./World/World"
+
 
 
 
@@ -20,23 +23,25 @@ export default class Experience {
         return Experience.instance
         else new Experience(canvas)
     }
+
     constructor(canvas) {
         Experience.instance = this;
         
-        this.dev = 0;
+        //this.dev = 0;
 
         
+        this.sizes = new Sizes();
         this.resources = new Resources(assets);
         this.canvas = canvas;
         this.scene = new THREE.Scene();
         this.time = new Time();
-        this.sizes = new Sizes();
         this.camera = new Camera();
         this.renderer = new Renderer();
         
         
         
         this.world = new World();
+        this.controls = new Controls();
         
         this.time.on("update", () => {
             this.camera.update();
@@ -65,7 +70,7 @@ export default class Experience {
         this.renderer.update();
         this.camera.update();
 
-        //this.renderer.render(this.scene, this.camera.perspectiveCamera);
+     
 
 
         //if (this.controls) {

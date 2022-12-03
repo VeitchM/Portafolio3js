@@ -12,6 +12,7 @@ export default class Sizes extends EventEmitter {
 
     constructor() {
         super();
+        this.frustrum = 5;
         this._resize();
         window.addEventListener("resize", ()=>{this._resize();
         })

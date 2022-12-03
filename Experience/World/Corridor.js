@@ -12,7 +12,8 @@ export default class Corridor {
 
         this.scene.add(this.corridor.scene)
 
-      
+        
+
 
         console.log("cube")
         console.log('Corridor: ', this.corridor)
@@ -20,6 +21,8 @@ export default class Corridor {
 
     }
 
+
+    
 
     setModel() {
 
