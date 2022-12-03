@@ -1,23 +1,47 @@
-*{
-  margin:0;
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@500&display=swap');
+
+* {
+  margin: 0;
   padding: 0;
   box-sizing: border-box;
- }
+  font-family: "Ubuntu";
+  color: var(--black);
+}
 
- .experience{
-  position:fixed;
+h1 {
+  font-size: 64px;
+  z-index: 9999999;
+}
+
+h3 {
+  font-size: 32px;
+}
+
+p {
+  font-size: 16px;
+}
+
+.experience {
+  position: fixed;
   width: 100vw;
   height: 100vh;
- }
+}
 
- .experience-canvas{
+.experience-canvas {
   width: 100%;
   height: 100%;
- }
+}
+
+:root{
+  --black: #242424;
+  --white: rgb(238, 233, 222);
+  --primary-color: rgb(182, 134, 44);
+  --secondary-color: rgb(120, 78, 145);
+}
 
 /* Page -------------------------------------------------------------*/
 
-.page{
+.page {
   z-index: 9999;
   width: 100%;
   height: 100%;
@@ -25,39 +49,154 @@
 
 }
 
-.page-wrapper{
+.page-wrapper {
   position: relative;
 }
 
 /* Hero -------------------------------------------------------------*/
 
 
-.hero{
+.hero {
   width: 100vw;
   height: 100vh;
 
 }
 
-.hero-wrapper{
+.hero-wrapper {
   position: relative;
   height: 100%;
   width: calc(100% - 160px);
   margin: 0 auto;
+  max-width: 1100px;
 }
 
-.hero-main{
-  position:absolute;
+.hero-main {
+  position: absolute;
   top: 30%;
   left: 0;
 
 }
 
-.hero-second{
-  position:absolute;
-  top: 20%;
-  right:0;
+.hero-main-description {
+  font-size: 18px;
 }
 
-/* Experience -------------------------------------------------------------*/
+.hero-second {
+  position: absolute;
+  top: 20%;
+  right: 0;
+}
 
+.hero-second-subheading {
+  font-size: 18px;
+  text-transform: uppercase;
 
+}
+
+/* Section Formating -------------------------------------------------------------*/
+.section-margin {
+  height: 1100px;
+  width:100%;
+}
+
+.section{
+  width:50%;
+  padding:1000px 4%;
+  margin: 0;
+  background-color: var(--white)
+
+}
+
+.left{
+  margin-right:auto;
+}
+
+.right{
+  margin-left:auto;
+}
+
+.section-intro-wrapper{
+  position:relative;
+  padding:20% 5%;
+  border-bottom: 2px solid var(--primary-color);
+  padding-bottom: 400px;
+}
+
+.section-detail-wrapper{
+  position:relative;
+  padding: 20% 5%; 
+}
+
+.section-heading{
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.8;
+  margin-top: 64px;
+}
+
+.section-text{
+  line-height: 1.8;
+  margin-top: 18px;
+  font-size: 16px;
+
+}
+
+/* Title Decorations -----------------------------------------------------------------*/
+
+.section-title{
+  position: relative;
+  color: var(--primary-color);
+}
+
+.section-title-text{
+  display: block;
+  font-size: 40px;
+  transform-origin: left;
+  padding-left: 30px;
+  transform: skewY(25deg);
+  z-index: 10;
+  color: var(--primary-color);
+  text-transform: uppercase;
+}
+
+.styleOne,
+.styleTwo,
+.styleThree{
+  position:absolute;
+  display:block;
+  width: 100%;
+  height: 60px;
+  max-width: 278px;
+  z-index: 0;
+  border: 1px solid var(--primary-color);
+  transform-origin: left;
+
+  
+  transform: skewY(25deg);  
+
+}
+
+.styleOne{
+  top:0px;
+  transform: skewY(-25deg);
+
+}
+
+.styleTwo{
+  top: 80px;
+  background-color: var(--primary-color);
+}
+
+.styleThree{
+  top: 80px;
+  transform: skewY(-25deg);
+
+}
+
+.section-number{
+  position: absolute;
+  bottom: 15px;
+  right: 0;
+  color: var(--primary-color);
+  font-size: 18px;
+}
