@@ -37,7 +37,6 @@ export default class Lighting {
         this.sunLight.target = targetSunLight;
 
         this.scene.add(this.sunLight)
-        console.log("SunLight")
     }
 
     lightsDesktop() {

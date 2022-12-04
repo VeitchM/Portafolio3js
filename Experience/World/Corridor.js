@@ -35,7 +35,7 @@ export default class Corridor {
         }
         
         const setShadows = (object) => {
-            console.log(object);
+            //console.log(object);
             if(object instanceof THREE.Mesh){
             object.castShadow = true;
             object.receiveShadow = true;
