@@ -6,7 +6,7 @@ import assets from "./Utils/assets"
 
 import Camera from "./Camera"
 import Renderer from "./Renderer"
-import Controls from "./Controls"
+import Controls from "./Controls/Controls"
 
 import Time from "./Utils/Time"
 import World from "./World/World"

@@ -21,6 +21,14 @@ export default class World {
         this.lighting = new Lighting();
         
     }
+
+    themeSwitch(value) {
+        console.log(this);
+        this.lighting.themeSwitch(value);
+
+
+
+    }
     
     floor() {
         const circleGeometry = new THREE.CircleGeometry(20, 32);

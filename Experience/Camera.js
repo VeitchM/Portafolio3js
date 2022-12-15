@@ -31,6 +31,7 @@ export default class Camera {
         this.debug()
 
         this.orbit(0, 0)
+        this.activeCamera.zoom = this.actualFrame.zoom;
         this.activeCamera.updateProjectionMatrix();
         console.log("Camera", this);
 
@@ -40,12 +41,13 @@ export default class Camera {
         this.cameraFrames = {};
 
         this.cameraFrames.desk = {
-            position: new THREE.Vector3(-5, 3.12, 1.14),
-            target: new THREE.Vector3(-7, 1.0, 5),
-            zoom: 1
+            position: new THREE.Vector3(-5-.8, 3.12-.35, 1.14),
+            target: new THREE.Vector3(-7-.8, 1.0-.35, 5),
+            zoom: .75
         };
 
-        this.cameraFrames.sideDesk = { ...this.shiftFrame(this.cameraFrames.desk, 10, 0), zoom: 4 };
+        this.cameraFrames.sideDesk = { ...this.shiftFrame(this.cameraFrames.desk, 1.8, .35), zoom: 2 };
+        this.cameraFrames.prueba = { ...this.shiftFrame(this.cameraFrames.desk, 1.5, 0), zoom: 2 };
         console.log(this.cameraFrames);
 
         /**  Defines the order of the frames for transitions */
@@ -86,9 +88,13 @@ export default class Camera {
     /** Gives a clone of frame shifted by the given cordinates)*/  
     shiftFrame(cameraFrame, x, y) {
         const direction = cameraFrame.target.clone().addScaledVector(cameraFrame.position, -1)
-        let vectorX = new Vector3(0, 1, 0).cross(direction)
-        vectorX = vectorX.normalize()
-        let vectorY = new Vector3(0, 1, 0).multiplyScalar(y | 0)
+        
+        let vectorX = new Vector3(0, 1.0, 0).cross(direction)
+        console.log("shift1",cameraFrame,"vX",vectorX,x,y,"direction",direction);
+        vectorX = vectorX.normalize().multiplyScalar(x? x: 0)
+        console.log("shift2",cameraFrame,"vX",vectorX,x,y,"direction",direction);
+
+        let vectorY = new Vector3(0, 1.0, 0).multiplyScalar(y ? y : 0)
 
         const clon = { ...cameraFrame }
 
@@ -96,7 +102,7 @@ export default class Camera {
         clon.target.add(vectorX).add(vectorY)
         clon.position = cameraFrame.position.clone()
         clon.position.add(vectorX).add(vectorY)
-        vectorX = vectorX.multiplyScalar(x | 0)
+        console.log("shift",cameraFrame,"vX",vectorX,"vY",vectorY,x,y,clon,"direction",direction);
 
         return clon
     }

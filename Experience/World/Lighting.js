@@ -1,6 +1,11 @@
+import GUI from "lil-gui";
 import * as THREE from "three";
 import { PointLight } from "three";
 import Experience from "../Experience.js";
+import {RectAreaLightHelper} from "three/examples/jsm/helpers/RectAreaLightHelper.js"
+
+
+import GSAP from "gsap"
 
 export default class Lighting {
 
@@ -11,16 +16,59 @@ export default class Lighting {
         this.resources = this.experience.resources;
 
         this.sunLight();
-        this.scene.add(new THREE.AmbientLight(0xffffff, 0.5))
-        this.lightsDesktop();
+        this.ambientLight = new THREE.AmbientLight(0xffffff, 0.5)
+        this.scene.add(this.ambientLight);
+        this.lights();
 
         //this.debug();
 
+
+        //this.deve()
+
+    }
+
+
+    deve() {
+        this.colorObj = { color: { r: 1, g: 1, b: 1 } }
+        this.gui = new GUI()
+        this.gui.addColor(this.colorObj, "color")
+    }
+
+    themeSwitch(value) {
+        if (value === "dark") {
+            this.darkTheme()
+
+        }
+        else this.lightTheme()
+    }
+
+    darkTheme() {
+
+        GSAP.to(this.sunLight.color, { r: 0.1725, g: 0.2313, b: 0.6863 })
+        GSAP.to(this.sunLight, { intensity: 0.5 })
+        //dark color 0x574f9f
+        GSAP.to(this.ambientLight, { intensity: 0.1 })
+        GSAP.to(this.ambientLight.color, { r: 0.1725, g: 0.2313, b: 0.6863 })
+        GSAP.to(this.lights.window, { intensity: .2})
+        GSAP.to(this.lights.window.color, {r: 0, g: 0,b: 1})
 
 
 
     }
 
+
+    lightTheme() {
+        GSAP.to(this.sunLight.color, {r: 1, g: 0.9,b: 0.9})
+        GSAP.to(this.sunLight, { intensity: 3 })
+     
+        GSAP.to(this.ambientLight.color, {r: 1, g: 0.9,b: 0.9})
+        GSAP.to(this.ambientLight, { intensity: 0.5})
+        GSAP.to(this.lights.window, { intensity: 4})
+        GSAP.to(this.lights.window.color, {r: 1, g: .9,b: .7})
+
+
+
+    }
     sunLight() {
         this.sunLight = new THREE.DirectionalLight("#ffffff", 3)
 
@@ -39,35 +87,55 @@ export default class Lighting {
         this.scene.add(this.sunLight)
     }
 
-    lightsDesktop() {
-        this.lightsDesktop = {};
+    lights() {
+        this.lights = {};
 
         const pointLight = (name, color, intensity, position) => {
             const light = new THREE.PointLight(color, intensity);
             light.position.copy(position);
             //light.castShadow = true;
             light.shadow.normalBias = 0.005
-            //light.shadow.bias = -0.00001
-                    
+            //light.shadow.bias = -0.00001      
             //up.shadowMapWidth = 2048
             light.shadow.radius = 0;
             //light.shadow.blurSamples = 1
-            this.lightsDesktop[name] = light
+            this.lights[name] = light
             this.scene.add(light);
             return light;
         }
+
+        const rectLight = (name, color, intensity, position, width, height,direction) => {
+            const light = new THREE.RectAreaLight(color, intensity,width, height)
+            light.position.copy(position);
+            light.lookAt(direction.add(position))
+            this.lights[name] = light
+            this.scene.add(light);
+            //const helper = new RectAreaLightHelper(light)
+            //this.scene.add(helper)
+
+            return light
+        }
+
         const lightDesktopInt = 0.05
-        const up = pointLight("up",0xFFEDB7, .5+.3, new THREE.Vector3(-6.8,2.4,4))
+        const up = pointLight("up", 0x5787ff, .5 +.3, new THREE.Vector3(-6.8, 2.4, 4))
         up.castShadow = true
-        pointLight("down",0xFFEDB7, .3, new THREE.Vector3(-7.2,0.8,3.8))
-        pointLight("topDesktop",0xFEFFF0, lightDesktopInt*3, new THREE.Vector3(-6.7113,1.3725-0.1,4.6715))
-        pointLight("booksDown",0xB4C9FF, lightDesktopInt , new THREE.Vector3(-7.057,1.687,4.958))
-        pointLight("booksUp",0xB4C9FF, .5, new THREE.Vector3(-7.05,1.9494,4.9587))
-        pointLight("helmet",0xFFF200, lightDesktopInt, new THREE.Vector3(-6.2515,1.6871,4.959))
-        pointLight("rope",0xFFD9DD, lightDesktopInt, new THREE.Vector3(-6.61,1.898, 4.96))
-        pointLight("rope2",0xFFD9DD, lightDesktopInt, new THREE.Vector3(-6.119,1.898, 4.96))
-        
-     
+        pointLight("down", 0x5787ff, .3, new THREE.Vector3(-7.2, 0.8, 3.8))
+        rectLight("topDesktop", 0xFFD9DD, .5, new THREE.Vector3(-6.75, 1.4, 4.959), 1.1, .6, new THREE.Vector3(0,-1,0))
+
+        //pointLight("topDesktop", 0xFEFFF0, lightDesktopInt * 3, new THREE.Vector3(-6.7113, 1.3725 - 0.1, 4.6715))
+        rectLight("booksDown", 0xB4C9FF, .5, new THREE.Vector3(-7.15, 1.7, 5), .5, .6, new THREE.Vector3(0,-1,0))
+
+        //pointLight("booksDown", 0xB4C9FF, lightDesktopInt, new THREE.Vector3(-7.057, 1.687, 4.958))
+        //pointLight("booksUp", 0xB4C9FF, .5, new THREE.Vector3(-7.05, 1.9494, 4.9587))
+        rectLight("booksUp", 0xB4C9FF, 1, new THREE.Vector3(-7.15, 2.1, 5), .5, .6, new THREE.Vector3(0,-1,0))
+
+        rectLight("helmet", 0xFFF200, .5, new THREE.Vector3(-6.4, 1.6871, 4.959), .6, .4, new THREE.Vector3(0,-1,0))
+
+        rectLight("rope", 0xFFD9DD, .5, new THREE.Vector3(-6.4, 2, 4.959), .6, .6, new THREE.Vector3(0,-1,0))
+
+        rectLight("window", 0xfffbdd, 4, new THREE.Vector3(-7.9,1.17,4.14785),1.87,1.87, new THREE.Vector3(1,0,0))
+
+
 
     }
 
@@ -77,9 +145,9 @@ export default class Lighting {
             const helper = new THREE.CameraHelper(this.sunLight.shadow.camera)
             this.scene.add(helper)
 
-            Object.values(this.lightsDesktop).map((light) => {
-                this.scene.add(new THREE.PointLightHelper(light,0.1))
-                this.scene.add(new THREE.CameraHelper(light.shadow.camera))
+            Object.values(this.lights).map((light) => {
+                //this.scene.add(new THREE.PointLightHelper(light, 0.1))
+                //this.scene.add(new THREE.CameraHelper(light.shadow.camera))
             })
 
         }
