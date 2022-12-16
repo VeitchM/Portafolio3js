@@ -14,11 +14,19 @@ export default class Lighting {
         this.experience = Experience.getInstance();
         this.scene = this.experience.scene;
         this.resources = this.experience.resources;
+        this.timeline= new GSAP.timeline()
+        this.lights = {}
 
         this.sunLight();
         this.ambientLight = new THREE.AmbientLight(0xffffff, 0.5)
+        const ambientLightColor = new THREE.Color("rgb(246,245,245)")
+        this.scene.background= ambientLightColor
         this.scene.add(this.ambientLight);
-        this.lights();
+        
+        
+        this.lightsCorridor();
+
+
 
         //this.debug();
 
@@ -27,7 +35,12 @@ export default class Lighting {
 
     }
 
+    showCorridor(){
+        Object.values(this.lights.corridor).forEach(light => {
+            this.scene.add(light);
+        });
 
+    }
     deve() {
         this.colorObj = { color: { r: 1, g: 1, b: 1 } }
         this.gui = new GUI()
@@ -43,14 +56,17 @@ export default class Lighting {
     }
 
     darkTheme() {
+        const ambientLightColor = new THREE.Color("rgb(135,155,204)")//"rgb(17.25%, 23.13%, 68.63%)");
+        console.log("theme", ambientLightColor, this.scene.background);
+        GSAP.to(this.scene.background, { ...ambientLightColor })
 
         GSAP.to(this.sunLight.color, { r: 0.1725, g: 0.2313, b: 0.6863 })
         GSAP.to(this.sunLight, { intensity: 0.5 })
         //dark color 0x574f9f
         GSAP.to(this.ambientLight, { intensity: 0.1 })
         GSAP.to(this.ambientLight.color, { r: 0.1725, g: 0.2313, b: 0.6863 })
-        GSAP.to(this.lights.window, { intensity: .2})
-        GSAP.to(this.lights.window.color, {r: 0, g: 0,b: 1})
+        GSAP.to(this.lights.corridor.window, { intensity: .2})
+        GSAP.to(this.lights.corridor.window.color, {r: 0, g: 0,b: 1})
 
 
 
@@ -58,13 +74,15 @@ export default class Lighting {
 
 
     lightTheme() {
+        const ambientLightColor = new THREE.Color("rgb(246,245,245)")
+        GSAP.to(this.scene.background, { ...ambientLightColor })
         GSAP.to(this.sunLight.color, {r: 1, g: 0.9,b: 0.9})
         GSAP.to(this.sunLight, { intensity: 3 })
      
         GSAP.to(this.ambientLight.color, {r: 1, g: 0.9,b: 0.9})
         GSAP.to(this.ambientLight, { intensity: 0.5})
-        GSAP.to(this.lights.window, { intensity: 4})
-        GSAP.to(this.lights.window.color, {r: 1, g: .9,b: .7})
+        GSAP.to(this.lights.corridor.window, { intensity: 4})
+        GSAP.to(this.lights.corridor.window.color, {r: 1, g: .9,b: .7})
 
 
 
@@ -77,6 +95,9 @@ export default class Lighting {
         this.sunLight.shadow.mapSize.set(1024, 1024);
         this.sunLight.shadow.normalBias = 0.05
         this.sunLight.shadow.camera.bottom = -5
+        this.sunLight.shadow.camera.right = 10
+
+        
         this.sunLight.position.set(-10, 7, 3);
 
         const targetSunLight = new THREE.Object3D();
@@ -85,13 +106,17 @@ export default class Lighting {
         this.sunLight.target = targetSunLight;
 
         this.scene.add(this.sunLight)
+
+
     }
 
-    lights() {
-        this.lights = {};
+    lightsCorridor() {
+        this.lights.corridor = {};
 
         const pointLight = (name, color, intensity, position) => {
-            const light = new THREE.PointLight(color, intensity);
+            
+            const light = new THREE.PointLight(color, 0);
+            this.timeline.to(light, {intensity: intensity, duration: Math.random()*3})
             light.position.copy(position);
             //light.castShadow = true;
             light.shadow.normalBias = 0.005
@@ -99,17 +124,18 @@ export default class Lighting {
             //up.shadowMapWidth = 2048
             light.shadow.radius = 0;
             //light.shadow.blurSamples = 1
-            this.lights[name] = light
-            this.scene.add(light);
+            this.lights.corridor[name] = light
+            //this.scene.add(light);
             return light;
         }
 
         const rectLight = (name, color, intensity, position, width, height,direction) => {
-            const light = new THREE.RectAreaLight(color, intensity,width, height)
+            const light = new THREE.RectAreaLight(color, 0,width, height)
+            this.timeline.to(light, {intensity: intensity, duration: Math.random()*3})
             light.position.copy(position);
             light.lookAt(direction.add(position))
-            this.lights[name] = light
-            this.scene.add(light);
+            this.lights.corridor[name] = light
+            //this.scene.add(light);
             //const helper = new RectAreaLightHelper(light)
             //this.scene.add(helper)
 
@@ -145,7 +171,7 @@ export default class Lighting {
             const helper = new THREE.CameraHelper(this.sunLight.shadow.camera)
             this.scene.add(helper)
 
-            Object.values(this.lights).map((light) => {
+            Object.values(this.lights.corridor).map((light) => {
                 //this.scene.add(new THREE.PointLightHelper(light, 0.1))
                 //this.scene.add(new THREE.CameraHelper(light.shadow.camera))
             })

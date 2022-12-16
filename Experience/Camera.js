@@ -2,6 +2,7 @@ import Experience from "./Experience";
 import * as THREE from "three";
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import { CameraHelper, Vector3 } from "three";
+import GSAP from 'gsap'
 
 import GUI from 'lil-gui';
 
@@ -12,7 +13,7 @@ export default class Camera {
 
 
         this.setFrames();
-
+        this.timeline = new GSAP.timeline()
 
 
         this.experience = Experience.getInstance();
@@ -22,6 +23,7 @@ export default class Camera {
         this.createPerspectiveCamera();
         this.createOrthographicCamera();
         this.activeCamera = this.orthographicCamera
+
 
 
 
@@ -35,6 +37,7 @@ export default class Camera {
         this.activeCamera.updateProjectionMatrix();
         console.log("Camera", this);
 
+
     }
 
     setFrames() {
@@ -45,54 +48,65 @@ export default class Camera {
             target: new THREE.Vector3(-7-.8, 1.0-.35, 5),
             zoom: .75
         };
+        this.cameraFrames.intro2 = { ...this.shiftFrame(this.cameraFrames.desk, -16,0 ),zoom: 0.25 };
+        this.cameraFrames.intro = { ...this.cameraFrames.desk,zoom: 0.4 };
 
         this.cameraFrames.sideDesk = { ...this.shiftFrame(this.cameraFrames.desk, 1.8, .35), zoom: 2 };
-        this.cameraFrames.prueba = { ...this.shiftFrame(this.cameraFrames.desk, 1.5, 0), zoom: 2 };
-        console.log(this.cameraFrames);
+        this.cameraFrames.balcon = { 
+            position: new Vector3(-8,3.2,1.14), 
+            target: new Vector3(-10,0.6,5),
+            zoom: 1 };
 
         /**  Defines the order of the frames for transitions */
-        this.frames = ["desk", "sideDesk"];
+        this.frames = ["intro","intro2","desk", "sideDesk","balcon"];
         // Actual frame exist for doing changes from the given state by the scroll controller
-        this.actualFrame = { ...this.cameraFrames.desk };
+        this.actualFrame = { ...this.cameraFrames.intro };
         this.transition = 0;
+    }
+
+    frameIndex(name){
+        return this.frames.findIndex( (element) => element==name)
     }
 
     /** It's update the actual frame from the transition class attribute */
     updateActualFrame() {
+        if(!this.freeCam){
 
-        let toFrame = this.frames[Math.ceil(this.transition)]
-        let fromFrame = this.frames[Math.floor(this.transition)]
-
-        //could be optimized, setting only when started or finished, or maybe i should let the builder improve it
-
-
-
-
-
-
-        for (const attribute of ["position", "target"]) {
-            let fromVector = this.cameraFrames[fromFrame][attribute];
-            let toVector = this.cameraFrames[toFrame][attribute];
-            this.actualFrame[attribute] = fromVector.clone().multiplyScalar(1 - this.transition % 1)
+            
+            let toFrame = this.frames[Math.ceil(this.transition)]
+            let fromFrame = this.frames[Math.floor(this.transition)]
+            //console.log("transition",this.transition, toFrame, fromFrame);
+            //console.trace()
+            
+            //could be optimized, setting only when started or finished, or maybe i should let the builder improve it
+            
+            
+            
+            
+            
+            
+            for (const attribute of ["position", "target"]) {
+                let fromVector = this.cameraFrames[fromFrame][attribute];
+                let toVector = this.cameraFrames[toFrame][attribute];
+                this.actualFrame[attribute] = fromVector.clone().multiplyScalar(1 - this.transition % 1)
                 .add(toVector.clone().multiplyScalar(this.transition % 1));
-        }
-        
+            }
+            
         this.activeCamera.zoom =this.actualFrame.zoom = this.cameraFrames[fromFrame].zoom * (1-this.transition % 1) + this.cameraFrames[toFrame].zoom * (this.transition % 1) 
         this.activeCamera.updateProjectionMatrix()
         
         this.controls.target = this.actualFrame.target
-
-
+        
     }
-
+        
+    }
+    
     /** Gives a clone of frame shifted by the given cordinates)*/  
     shiftFrame(cameraFrame, x, y) {
         const direction = cameraFrame.target.clone().addScaledVector(cameraFrame.position, -1)
         
         let vectorX = new Vector3(0, 1.0, 0).cross(direction)
-        console.log("shift1",cameraFrame,"vX",vectorX,x,y,"direction",direction);
         vectorX = vectorX.normalize().multiplyScalar(x? x: 0)
-        console.log("shift2",cameraFrame,"vX",vectorX,x,y,"direction",direction);
 
         let vectorY = new Vector3(0, 1.0, 0).multiplyScalar(y ? y : 0)
 
@@ -102,15 +116,16 @@ export default class Camera {
         clon.target.add(vectorX).add(vectorY)
         clon.position = cameraFrame.position.clone()
         clon.position.add(vectorX).add(vectorY)
-        console.log("shift",cameraFrame,"vX",vectorX,"vY",vectorY,x,y,clon,"direction",direction);
 
         return clon
     }
 
     orbit(mouseX, mouseY) {
+        if(!this.freeCam){
         this.activeCamera.position.x = this.actualFrame.position.x + 4 * mouseX; //Change 4 with proportion of distance to target
         this.activeCamera.position.y = this.actualFrame.position.y + 2 * mouseY;
         this.activeCamera.position.z = this.actualFrame.position.z;
+        }
     }
 
     createOrthographicCamera() {
@@ -185,6 +200,8 @@ export default class Camera {
 
     debug() {
         if (this.experience.dev) {
+
+            this.freeCam == true;
 
             this.debug = {}
             this.debug.perspectiveCamera = new THREE.CameraHelper(this.perspectiveCamera)

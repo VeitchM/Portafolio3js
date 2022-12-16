@@ -10,6 +10,7 @@ import Controls from "./Controls/Controls"
 
 import Time from "./Utils/Time"
 import World from "./World/World"
+import Preloader from "./Controls/Preloader"
 
 
 
@@ -42,6 +43,7 @@ export default class Experience {
         
         this.world = new World();
         this.controls = new Controls();
+        this.preloader = new Preloader();
         
         this.time.on("update", () => {
             this.camera.update();

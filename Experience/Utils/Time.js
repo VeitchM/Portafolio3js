@@ -12,10 +12,11 @@ export default class Time extends EventEmitter {
     }
 
     update() {
-        const currentTime = Date.now();
-        this.delta = currentTime - this.current;
-        this.current = currentTime;
-        this.elapsed = this.current - this.start;
+        //const currentTime = Date.now();
+        //this.delta = currentTime - this.current;
+        //this.current = currentTime;
+        //this.elapsed = this.current - this.start;
+        //console.log("FPS", 1000/this.delta);
 
         this.emit("update");
         window.requestAnimationFrame(() => this.update());

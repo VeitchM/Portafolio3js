@@ -13,6 +13,7 @@ export default class Controls {
     constructor() {
         this.experience = Experience.getInstance();
         this.camera = this.experience.camera
+        this.frameIndex = (name) => {return this.camera.frameIndex(name)}
         this.scene = this.experience.scene;
         this.canvas = this.experience.canvas;
         this.world = this.experience.world;
@@ -22,6 +23,7 @@ export default class Controls {
         this.setThemeController();
         this.SmoothScroll = this.setupASScroll();
         this.setScrollController();
+
 
     }
 
@@ -98,29 +100,47 @@ export default class Controls {
     setScrollController() {
         ScrollTrigger.matchMedia({
 
-            all : () => {
+            all: () => {
                 this.setProgressBar();
             },
 
             "(min-width: 969px)": () => {
 
-                this.timeline = new GSAP.timeline(),
-                    this.timeline.to(this.camera, {
-                        transition: 1,
+                
+                this.camera.timeline.to(this.camera, {
+                    transition: this.frameIndex("sideDesk"),
 
-                        onUpdate: () => {
-                            this.camera.updateActualFrame(); //this.onMouseMove(this.lastMousePosition)
-                        },
-                        //onComplete: () => { console.log(this.camera) },
-                        scrollTrigger: {
-                            trigger: ".first-move",
-                            markers: true,
-                            start: "top top",
-                            end: "bottom top",
-                            scrub: 4,
-                            //invalidateOnRefresh: true //toDo uncomment this
-                        }
-                    })
+                    onUpdate: () => {
+                        this.camera.updateActualFrame(); //this.onMouseMove(this.lastMousePosition)
+                    },
+                    //onComplete: () => { console.log(this.camera) },
+                    scrollTrigger: {
+                        trigger: ".first-move",
+                        markers: true,
+                        start: "top top",
+                        end: "bottom top",
+                        scrub: 4,
+                        invalidateOnRefresh: true //toDo uncomment this
+                    }
+                }),
+                this.camera.timeline.to(this.camera, {
+                    transition: this.frameIndex("balcon"),
+
+                    onUpdate: () => {
+                        this.camera.updateActualFrame(); //this.onMouseMove(this.lastMousePosition)
+                    },
+                    //onComplete: () => { console.log(this.camera) },
+                    scrollTrigger: {
+                        trigger: ".second-move",
+                        markers: true,
+                        start: "top top",
+                        end: "bottom top",
+                        scrub: 4,
+                        invalidateOnRefresh: true //toDo uncomment this
+                    }
+                })
+
+
             }
         })
     }
@@ -186,7 +206,7 @@ export default class Controls {
     }
 
     setMouseController() {
-        window.addEventListener("mousemove", (e) => this.onMouseMove(e));
+        window.addEventListener("mousemove", (e) => this.onMouseMove(e));//TODO anular al principio
 
         this.mouseLerp = {
             current: { mouseX: 0, mouseY: 0 },
