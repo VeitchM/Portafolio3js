@@ -16,11 +16,7 @@ export default class Preloader extends EventEmitter {
         this.resources = this.experience.resources;
         this.camera = this.experience.camera;
         this.world = this.experience.world;
-        this.device = this.sizes.device;
-
-        this.sizes.on("switchdevice", (device) => {
-            this.device = device;
-        });
+      
 
         //window.removeEventListener("wheel",this.onScroll.bind(this))
 

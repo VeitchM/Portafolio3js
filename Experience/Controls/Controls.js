@@ -29,7 +29,16 @@ export default class Controls {
         this.preloader.on("enablecontrols", () => {
             GSAP.registerPlugin(ScrollTrigger);
             this.setThemeController();
-            this.smoothScroll = this.setupASScroll();
+            if (
+                !/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+                    navigator.userAgent
+                )
+            ) {
+                console.log("android");
+               // this.smoothScroll = this.setupASScroll();
+            }
+            console.log('notAndroid');
+            console.log("userAgent", navigator.userAgent)
             this.setScrollController();
 
         })
@@ -111,9 +120,9 @@ export default class Controls {
 
             all: () => {
                 this.setProgressBar();
-            },
+                // },
 
-            "(min-width: 969px)": () => {
+                // "(min-width: 969px)": () => {
 
 
                 this.camera.timeline.to(this.camera, {
