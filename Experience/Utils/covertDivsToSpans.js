@@ -9,6 +9,5 @@ export default function (element) {
             return `<span class="animatedis">${char}</span>`;
         })
         .join("");
-
     return element;
 }

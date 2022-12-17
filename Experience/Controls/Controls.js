@@ -13,17 +13,26 @@ export default class Controls {
     constructor() {
         this.experience = Experience.getInstance();
         this.camera = this.experience.camera
-        this.frameIndex = (name) => {return this.camera.frameIndex(name)}
+        this.frameIndex = (name) => { return this.camera.frameIndex(name) }
         this.scene = this.experience.scene;
         this.canvas = this.experience.canvas;
         this.world = this.experience.world;
+        this.preloader = this.experience.preloader;
         this.lastMousePosition = { clientX: window.innerWidth / 2, clientY: window.innerHeight / 2 };
-        GSAP.registerPlugin(ScrollTrigger);
         this.setMouseController();
-        this.setThemeController();
-        this.SmoothScroll = this.setupASScroll();
-        this.setScrollController();
 
+
+        //Make page visible
+        document.getElementsByClassName("page")[0].style.visibility = "visible";
+
+
+        this.preloader.on("enablecontrols", () => {
+            GSAP.registerPlugin(ScrollTrigger);
+            this.setThemeController();
+            this.smoothScroll = this.setupASScroll();
+            this.setScrollController();
+
+        })
 
     }
 
@@ -106,7 +115,7 @@ export default class Controls {
 
             "(min-width: 969px)": () => {
 
-                
+
                 this.camera.timeline.to(this.camera, {
                     transition: this.frameIndex("sideDesk"),
 
@@ -116,29 +125,29 @@ export default class Controls {
                     //onComplete: () => { console.log(this.camera) },
                     scrollTrigger: {
                         trigger: ".first-move",
-                        markers: true,
+                        // markers: true,
                         start: "top top",
                         end: "bottom top",
                         scrub: 4,
                         invalidateOnRefresh: true //toDo uncomment this
                     }
                 }),
-                this.camera.timeline.to(this.camera, {
-                    transition: this.frameIndex("balcon"),
+                    this.camera.timeline.to(this.camera, {
+                        transition: this.frameIndex("balcon"),
 
-                    onUpdate: () => {
-                        this.camera.updateActualFrame(); //this.onMouseMove(this.lastMousePosition)
-                    },
-                    //onComplete: () => { console.log(this.camera) },
-                    scrollTrigger: {
-                        trigger: ".second-move",
-                        markers: true,
-                        start: "top top",
-                        end: "bottom top",
-                        scrub: 4,
-                        invalidateOnRefresh: true //toDo uncomment this
-                    }
-                })
+                        onUpdate: () => {
+                            this.camera.updateActualFrame(); //this.onMouseMove(this.lastMousePosition)
+                        },
+                        //onComplete: () => { console.log(this.camera) },
+                        scrollTrigger: {
+                            trigger: ".second-move",
+                            // markers: true,
+                            start: "top top",
+                            end: "bottom top",
+                            scrub: 4,
+                            invalidateOnRefresh: true //toDo uncomment this
+                        }
+                    })
 
 
             }

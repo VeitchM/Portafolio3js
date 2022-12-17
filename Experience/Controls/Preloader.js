@@ -47,7 +47,7 @@ export default class Preloader extends EventEmitter {
 
 
     reappearParameters(cssClass) {
-        return [cssClass+" .animatedis" , {
+        return [cssClass + " .animatedis", {
             yPercent: -100,
             stagger: 0.05,
             ease: "back.out(1.7)",
@@ -57,15 +57,7 @@ export default class Preloader extends EventEmitter {
 
     playIntro() {
 
-        this.introCube = new THREE.Mesh(new THREE.BoxGeometry(2, 2, 2), new THREE.MeshStandardMaterial());
-        this.introCube.castShadow = true;
-        this.introCube.receiveShadow = true;
-        this.introCube.position.copy(this.camera.cameraFrames.desk.target)
-        this.introCube.lookAt(this.camera.cameraFrames.desk.position)
-        this.introCube.rotateY(Math.PI / 4)
-        let direction = this.camera.actualFrame.target.clone().addScaledVector(this.camera.actualFrame.position, -1).normalize();
-        this.introCube.rotateOnWorldAxis(new Vector3(0, 1, 0).cross(direction), Math.PI * 1 / 2 - direction.angleTo(new Vector3(0, 1, 0)))
-        this.scene.add(this.introCube);
+        this.introCube();
 
 
         const frameIndex = (name) => { return this.camera.frameIndex(name) }
@@ -73,33 +65,47 @@ export default class Preloader extends EventEmitter {
         const timeline = this.camera.timeline
 
 
-        // All about tge cube animation
-        timeline.to(this.camera, {
-            transition: frameIndex('intro2'),
-            ease: "power3.inOut(2.5)",
-            delay: 2,//1,
-            duration: 2,//3,
-            onUpdate: () => {
-                this.camera.updateActualFrame();
-            },
+      
+        timeline.to(".preloader", {
+            opacity: 0,
+            onComplete: () => {
+               document.querySelector(".preloader").remove()
+             
+            }
 
         })
+            .to(this.introCube.scale, {
+            x: 1, y: 1, z: 1,
+            duration:1,
+            ease: "power3.inOut(2.5)",
+        })
+            .to(this.camera, {
+                transition: frameIndex('intro2'),
+                ease: "power3.inOut(2.5)",
+                delay: 0.5,//1,
+                duration: 2,//3,
+                onUpdate: () => {
+                    this.camera.updateActualFrame();
+                },
+
+            })
             .to(...this.reappearParameters(".intro-text"))
             .to(".intro-text .animatedis", {
                 yPercent: 0,
                 stagger: 0.05,
+                delay: 0.5,
                 ease: "back.out(1.7)",
-            })
+            }, "spinzoom")
         timeline.to(this.introCube.rotation, {
             y: Math.PI * 3,
             ease: "power3.inOut(2.5)",
-            delay: 0,//1,
+            delay: 0.6,//1,
             duration: 2,//3,)
         }, "spinzoom")
         timeline.to(this.camera, {
             transition: frameIndex("desk"),
             ease: "power3.inOut(2.5)",
-            delay: 0,//1,
+            delay: 0.6,//1,
             duration: 2,//3,
             onUpdate: () => {
                 this.camera.updateActualFrame();
@@ -132,6 +138,19 @@ export default class Preloader extends EventEmitter {
 
     }
 
+    introCube() {
+        this.introCube = new THREE.Mesh(new THREE.BoxGeometry(2, 2, 2), new THREE.MeshStandardMaterial());
+        this.introCube.castShadow = true;
+        this.introCube.receiveShadow = true;
+        this.introCube.position.copy(this.camera.cameraFrames.desk.target);
+        this.introCube.lookAt(this.camera.cameraFrames.desk.position);
+        this.introCube.rotateY(Math.PI / 4);
+        let direction = this.camera.actualFrame.target.clone().addScaledVector(this.camera.actualFrame.position, -1).normalize();
+        this.introCube.rotateOnWorldAxis(new Vector3(0, 1, 0).cross(direction), Math.PI * 1 / 2 - direction.angleTo(new Vector3(0, 1, 0)));
+        this.introCube.scale.set(0, 0, 0);
+        this.scene.add(this.introCube);
+    }
+
     playSecondIntro() {
         console.log("Second Intro init");
         const timeline = new GSAP.timeline()
@@ -154,10 +173,12 @@ export default class Preloader extends EventEmitter {
         };
 
         recursiveSet(corridor.children, setProperties);
-        timeline.to(...this.reappearParameters(".hero-main-title"),"corridor")
-        timeline.to(...this.reappearParameters(".hero-main-description"),"corridor")
-        timeline.to(...this.reappearParameters(".hero-second-subheading"),"corridor")
-        timeline.to(...this.reappearParameters(".second-sub"),"corridor")
+        timeline.to(...this.reappearParameters(".hero-main-title"), "corridor")
+        timeline.to(...this.reappearParameters(".hero-main-description"), "corridor")
+        timeline.to(...this.reappearParameters(".hero-second-subheading"), "corridor")
+        timeline.to(...this.reappearParameters(".second-sub"), "corridor")
+        timeline.to(".toggle-bar",{opacity:1},"corridor")
+        setTimeout( () => {console.log(this); this.emit('enablecontrols')},5000)
 
 
         this.experience.world.lighting.showCorridor()

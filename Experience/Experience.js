@@ -42,8 +42,12 @@ export default class Experience {
         
         
         this.world = new World();
-        this.controls = new Controls();
         this.preloader = new Preloader();
+        this.controls = new Controls();
+        //  this.preloader.on("enablecontrols", () => {
+        //     this.controls = new Controls();
+        //  });
+
         
         this.time.on("update", () => {
             this.camera.update();

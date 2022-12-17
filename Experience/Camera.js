@@ -48,14 +48,14 @@ export default class Camera {
             target: new THREE.Vector3(-7-.8, 1.0-.35, 5),
             zoom: .75
         };
-        this.cameraFrames.intro2 = { ...this.shiftFrame(this.cameraFrames.desk, -16,0 ),zoom: 0.25 };
+        this.cameraFrames.intro2 = { ...this.shiftFrame(this.cameraFrames.desk, -5,0 ),zoom: 0.25 };
         this.cameraFrames.intro = { ...this.cameraFrames.desk,zoom: 0.4 };
 
         this.cameraFrames.sideDesk = { ...this.shiftFrame(this.cameraFrames.desk, 1.8, .35), zoom: 2 };
         this.cameraFrames.balcon = { 
-            position: new Vector3(-8,3.2,1.14), 
-            target: new Vector3(-10,0.6,5),
-            zoom: 1 };
+            position: new Vector3(-16,3.2 + .5,1.14), 
+            target: new Vector3(-11,0.6 + .5,5),
+            zoom: 1.8 };
 
         /**  Defines the order of the frames for transitions */
         this.frames = ["intro","intro2","desk", "sideDesk","balcon"];
