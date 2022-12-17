@@ -23,22 +23,17 @@ export default class Controls {
 
 
         //Make page visible
-        document.getElementsByClassName("page")[0].style.visibility = "visible";
+    
+        this.page = document.querySelector(".page")
+        this.page.style.visibility = "visible";
+       
 
 
         this.preloader.on("enablecontrols", () => {
+            this.page.style.overflow = "visible";
             GSAP.registerPlugin(ScrollTrigger);
             this.setThemeController();
-            if (
-                !/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-                    navigator.userAgent
-                )
-            ) {
-                console.log("android");
-               // this.smoothScroll = this.setupASScroll();
-            }
-            console.log('notAndroid');
-            console.log("userAgent", navigator.userAgent)
+            //this.smoothScroll = this.setupASScroll();
             this.setScrollController();
 
         })
@@ -120,9 +115,9 @@ export default class Controls {
 
             all: () => {
                 this.setProgressBar();
-                // },
+            // },
 
-                // "(min-width: 969px)": () => {
+            // "(min-width: 969px)": () => {
 
 
                 this.camera.timeline.to(this.camera, {
