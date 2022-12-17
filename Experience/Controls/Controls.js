@@ -33,7 +33,7 @@ export default class Controls {
             this.page.style.overflow = "visible";
             GSAP.registerPlugin(ScrollTrigger);
             this.setThemeController();
-            //this.smoothScroll = this.setupASScroll();
+            //this.smoothScroll = this.setupASScroll(); verificar que use PC
             this.setScrollController();
 
         })
