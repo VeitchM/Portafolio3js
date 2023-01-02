@@ -16,11 +16,12 @@ export default class Preloader extends EventEmitter {
         this.resources = this.experience.resources;
         this.camera = this.experience.camera;
         this.world = this.experience.world;
-      
+
 
         //window.removeEventListener("wheel",this.onScroll.bind(this))
 
         this.setAssets();
+
         this.world.on("worldReady", () => {
             this.playIntro();
         });
@@ -61,20 +62,19 @@ export default class Preloader extends EventEmitter {
         const timeline = this.camera.timeline
 
 
-      
         timeline.to(".preloader", {
             opacity: 0,
             onComplete: () => {
-               document.querySelector(".preloader").remove()
-             
+                document.querySelector(".preloader").remove()
+
             }
 
         })
             .to(this.introCube.scale, {
-            x: 1, y: 1, z: 1,
-            duration:1,
-            ease: "power3.inOut(2.5)",
-        })
+                x: 1, y: 1, z: 1,
+                duration: 1,
+                ease: "power3.inOut(2.5)",
+            })
             .to(this.camera, {
                 transition: frameIndex('intro2'),
                 ease: "power3.inOut(2.5)",
@@ -156,13 +156,15 @@ export default class Preloader extends EventEmitter {
             if (object instanceof THREE.Mesh) {
                 timeline.to(object, {
                     transition: 1,
-                    ease: "power3.out(2)",
+                    //ease: "power3.out(2)",
+                    ease: 'none.none',
                     delay: Math.random() * 5,
                     duration: Math.random() * 2 + .1,
 
                     onUpdate: () => { Corridor.objectTransition(object); }
                 }, "corridor")
 
+                console.log('algo');
 
             }
 
@@ -173,11 +175,16 @@ export default class Preloader extends EventEmitter {
         timeline.to(...this.reappearParameters(".hero-main-description"), "corridor")
         timeline.to(...this.reappearParameters(".hero-second-subheading"), "corridor")
         timeline.to(...this.reappearParameters(".second-sub"), "corridor")
-        timeline.to(".toggle-bar",{opacity:1},"corridor")
-        setTimeout( () => {console.log(this); this.emit('enablecontrols')},5000)
+        timeline.to(".toggle-bar", { opacity: 1 }, "corridor")
+        setTimeout(() => {
+            console.log(this);
+            this.emit('enablecontrols');   
+            this.experience.world.lighting.showCorridor()
+ 
+
+        }, 6000)
 
 
-        this.experience.world.lighting.showCorridor()
 
 
 
