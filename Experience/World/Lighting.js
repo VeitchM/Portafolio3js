@@ -42,10 +42,13 @@ export default class Lighting {
             light.targIntensity = light.intensity;
             light.intensity = 0;
             this.timeline.to(
-                light, {
+                light,
+                {
+                    ease: 'none.none',
                     intensity: light.targIntensity,
-                duration: Math.random() * 5 + 3
-            }
+                    duration: Math.random() * 2 + 1,
+                    delay: Math.random() * 2 + 4
+                }
             )
         }
 
@@ -59,9 +62,7 @@ export default class Lighting {
 
         // }
         //addOneByOne(lights)
-        setTimeout(() => {this.scene.add(...lights)}
-        ,3000
-        );
+        setTimeout(() => { this.scene.add(...lights) }, 3000);
 
     }
     deve() {
