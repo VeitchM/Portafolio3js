@@ -23,10 +23,10 @@ export default class Controls {
 
 
         //Make page visible
-    
+
         this.page = document.querySelector(".page")
         this.page.style.visibility = "visible";
-       
+
 
 
         this.preloader.on("enablecontrols", () => {
@@ -115,9 +115,9 @@ export default class Controls {
 
             all: () => {
                 this.setProgressBar();
-            // },
+                // },
 
-            // "(min-width: 969px)": () => {
+                // "(min-width: 969px)": () => {
 
 
                 this.camera.timeline.to(this.camera, {
@@ -133,7 +133,7 @@ export default class Controls {
                         start: "top top",
                         end: "bottom top",
                         scrub: 4,
-                        invalidateOnRefresh: true //toDo uncomment this
+                        invalidateOnRefresh: true
                     }
                 }),
                     this.camera.timeline.to(this.camera, {
@@ -149,7 +149,23 @@ export default class Controls {
                             start: "top top",
                             end: "bottom top",
                             scrub: 4,
-                            invalidateOnRefresh: true //toDo uncomment this
+                            invalidateOnRefresh: true
+                        }
+                    }),
+                    this.camera.timeline.to(this.camera, {
+                        transition: this.frameIndex("sideDesk"),
+
+                        onUpdate: () => {
+                            this.camera.updateActualFrame(); //this.onMouseMove(this.lastMousePosition)
+                        },
+                        //onComplete: () => { console.log(this.camera) },
+                        scrollTrigger: {
+                            trigger: ".third-move",
+                            // markers: true,
+                            start: "top top",
+                            end: "bottom top",
+                            scrub: 4,
+                            invalidateOnRefresh: true
                         }
                     })
 
