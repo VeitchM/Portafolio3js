@@ -180,6 +180,8 @@ export default class Preloader extends EventEmitter {
             console.log(this);
             this.emit('enablecontrols');   
             this.experience.world.lighting.showCorridor()
+            timeline.to(".arrow-svg-wrapper", { opacity: 1 })
+
  
 
         }, 6000)

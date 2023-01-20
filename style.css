@@ -348,6 +348,29 @@ p, h1, section,span,svg,button{
   transform: translate(-50%, -50%);
 }
 
+.arrow-svg-wrapper{
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  color: var(--color-text);
+  transform: translate(-50%, -50%);
+  animation: bounce 0.5s ease-in alternate infinite;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  opacity: 0;
+}
+
+@keyframes bounce {
+  0%{
+    transform: translateY(0)
+  }
+
+  100%{
+    transform: translateY(8px)
+  }
+}
+
 /* Preloader */
 .preloader{
   background-color: var(--color-background-light);
