@@ -9,13 +9,31 @@
     "preview": "vite preview"
   },
   "devDependencies": {
+    "@vitejs/plugin-react": "^2.0.1",
     "vite": "^3.2.5"
   },
   "dependencies": {
     "@ashthornton/asscroll": "^2.0.11",
+    "babel-cli": "^6.26.0",
+    "babel-preset-react-app": "^3.1.2",
     "events": "^3.3.0",
     "gsap": "^3.11.3",
     "lil-gui": "^0.17.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "three": "^0.146.0"
-  }
+  },
+  "main": "main.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/VeitchM/Portafolio3js.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/VeitchM/Portafolio3js/issues"
+  },
+  "homepage": "https://github.com/VeitchM/Portafolio3js#readme",
+  "description": ""
 }
