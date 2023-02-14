@@ -181,7 +181,7 @@ export default class Preloader extends EventEmitter {
             this.emit('enablecontrols');   
             this.experience.world.lighting.showCorridor()
             timeline.to(".arrow-svg-wrapper", { opacity: 1 })
-            timeline.to(".toggle-bar", { opacity: 1 })
+            timeline.to(".toggle-theme", { opacity: 1 })
             timeline.to(".toggle-language", { opacity: 1 })
 
  

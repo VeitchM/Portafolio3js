@@ -90,8 +90,8 @@ export default class Controls {
 
     setThemeController() {
         this.theme = {};
-        const toggleButton = this.theme.toggleButton = document.querySelector(".toggle-button");
-        const toggleCircle = this.theme.toggleCircle = document.querySelector(".toggle-circle")
+        const toggleButton = this.theme.toggleButton = document.getElementById("theme-button");
+        const toggleCircle = this.theme.toggleCircle = document.getElementById("theme-button-circle")
         toggleButton.addEventListener("click", () => {
             toggleCircle.classList.toggle("slide");
             this.theme.value = this.theme.value === "dark" ? "light" : "dark";

@@ -71,36 +71,6 @@ p, h1, section,span,svg,button{
 }
 
 /* Toggle -------------------------------------------------------------*/
-.toggle-bar {
-
-  position: fixed;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  top: 96px;
-  right: 48px;
-  z-index: 99999;
-  opacity: 0;
-  color: var(--primary-color);
-
-}
-
-.toggle-button {
-  cursor: pointer;
-  position: relative;
-  width: 56px;
-  height: 28px;
-  justify-content: center;
-  display: flex;
-  align-items: center;
-  border-radius: 50px;
-  margin: 0px 8px;
-  border: none;
-  color: var(--primary-color);
-  background-color: currentColor;
-  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-}
-
 .toggle-circle {
   position: absolute;
   left: 6px;
@@ -111,24 +81,12 @@ p, h1, section,span,svg,button{
   transition: all 0.2s ease-in-out;
 }
 
-.toggle-button:hover .toggle-circle{
-  transform: scale(0.9);
-}
-
-
 .slide{
 
   left:31px;
 }
 
-.sun-wrapper,
-.moon-wrapper {
-  display: flex;
-  justify-content: center;
-  align-items: center;
- 
 
-}
 
 /* Hero -------------------------------------------------------------*/
 
@@ -238,10 +196,10 @@ p, h1, section,span,svg,button{
   padding-bottom: 400px;
 }
 
-.section-detail-wrapper {
+/* .section-detail-wrapper {
   position: relative;
   padding: 20% 5%;
-}
+} */
 
 .section-heading {
   font-size: 32px;
@@ -250,12 +208,12 @@ p, h1, section,span,svg,button{
   margin-top: 64px;
 }
 
-.section-text {
+/* .section-text {
   line-height: 1.8;
   margin-top: 18px;
   font-size: 24px;
 
-}
+} */
 
 /* Title Decorations -----------------------------------------------------------------*/
 
@@ -341,11 +299,11 @@ p, h1, section,span,svg,button{
   align-items: center;
   position: absolute;
   top: 50%;
-  left: 50%;
+  left: 40%;
   font-weight: 500;
   font-size: 16px;
   color: var(--color-text);
-  transform: translate(-50%, -50%);
+  /* transform: translate(-50%, -50%); */
 }
 
 .arrow-svg-wrapper{
@@ -443,6 +401,16 @@ p, h1, section,span,svg,button{
     left: auto;
   }
  
+  .toggle-circle{
+    width: 14px;
+    height: 14px;
+
+  }
+  
+  .slide{
+    left:20px;
+  }
+
   
   .hero-main{
     top:10%;
