@@ -23,7 +23,7 @@ const Switch = (props) => {
             </Words>
 
             <button onClick={onPressed}      class="toggle-button">
-                <div class={"toggle-circle"+(props.language=='es'? ' slide':'') }>
+                <div className={"toggle-circle"+(props.language=='es'? ' slide':'') }>
 
 
                 </div>
