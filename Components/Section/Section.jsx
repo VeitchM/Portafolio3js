@@ -1,4 +1,5 @@
 import React from 'react';
+import {SectionText,SectionDetailWrapper} from './Section.styles.js'
 
 const Section = (props) => {
     const sectionText = props.text
@@ -26,22 +27,22 @@ const Section = (props) => {
             </section>
 
 
-            <div className="section-detail-wrapper">
+            <SectionDetailWrapper>
                 {
                     sectionText.content.map(subSection => (<>
                         <h3 key={subSection.subtitle} className="section-heading">{subSection.subtitle}</h3>
                         {subSection.text.map(p => (
-                            <p key={p} className="section-text">{p}</p>
+                            <SectionText>{p}</SectionText>
                         ))
                         }
                         {subSection.link &&
                             <a key={subSection.link.show}
                                 href={subSection.link.link}
-                                className="section-text">{subSection.link.show}</a>}
+                                className="link-text">{subSection.link.show}</a>}
                     </>))
                 }
 
-            </div>
+            </SectionDetailWrapper>
         </section>
     </>
     );
