@@ -1,14 +1,16 @@
 import React from 'react';
 
-const Section = (sectionText, number) => {
-    const cardinal =['','first','second','third']
-    const side = number%2==0 ? 'right' :'left' ;
+const Section = (props) => {
+    const sectionText = props.text
+    const number = props.number
+    const cardinal = ['', 'first', 'second', 'third']
+    const side = number % 2 == 0 ? 'right' : 'left';
     return (<>
-        <div className={"section-margin "+cardinal[number]+"-move"}></div>
+        <div className={"section-margin " + cardinal[number] + "-move"}></div>
 
 
-        <section className={cardinal[number]+"-section section "+side}>
-            <div className={"progress-wrapper progress-bar-wrapper-"+side}>
+        <section className={cardinal[number] + "-section section " + side}>
+            <div className={"progress-wrapper progress-bar-wrapper-" + side}>
                 <div className="progress-bar"></div>
             </div>
 
@@ -27,11 +29,15 @@ const Section = (sectionText, number) => {
             <div className="section-detail-wrapper">
                 {
                     sectionText.content.map(subSection => (<>
-                        <h3 className="section-heading">{subSection.subtitle}</h3>
+                        <h3 key={subSection.subtitle} className="section-heading">{subSection.subtitle}</h3>
                         {subSection.text.map(p => (
-                            <p>{p}</p>
+                            <p key={p} className="section-text">{p}</p>
                         ))
                         }
+                        {subSection.link &&
+                            <a key={subSection.link.show}
+                                href={subSection.link.link}
+                                className="section-text">{subSection.link.show}</a>}
                     </>))
                 }
 

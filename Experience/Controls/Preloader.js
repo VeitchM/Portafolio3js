@@ -175,12 +175,14 @@ export default class Preloader extends EventEmitter {
         timeline.to(...this.reappearParameters(".hero-main-description"), "corridor")
         timeline.to(...this.reappearParameters(".hero-second-subheading"), "corridor")
         timeline.to(...this.reappearParameters(".second-sub"), "corridor")
-        timeline.to(".toggle-bar", { opacity: 1 }, "corridor")
+      
         setTimeout(() => {
             console.log(this);
             this.emit('enablecontrols');   
             this.experience.world.lighting.showCorridor()
             timeline.to(".arrow-svg-wrapper", { opacity: 1 })
+            timeline.to(".toggle-bar", { opacity: 1 })
+            timeline.to(".toggle-language", { opacity: 1 })
 
  
 
