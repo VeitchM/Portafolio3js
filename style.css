@@ -208,12 +208,12 @@ p, h1, section,span,svg,button{
   margin-top: 64px;
 }
 
-/* .section-text {
+.link-text {
   line-height: 1.8;
   margin-top: 18px;
   font-size: 24px;
 
-} */
+}
 
 /* Title Decorations -----------------------------------------------------------------*/
 
@@ -290,7 +290,7 @@ p, h1, section,span,svg,button{
 
 .animatedis{
   display: inline-block;
-  transform: translateY(100%); 
+  /* transform: translateY(100%);  */
 }
 
 .intro-text{
@@ -401,6 +401,8 @@ p, h1, section,span,svg,button{
     left: auto;
   }
  
+
+  
   .toggle-circle{
     width: 14px;
     height: 14px;

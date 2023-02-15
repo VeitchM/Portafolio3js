@@ -16,7 +16,11 @@ export default class Preloader extends EventEmitter {
         this.resources = this.experience.resources;
         this.camera = this.experience.camera;
         this.world = this.experience.world;
+        this.timeline = new GSAP.timeline()
+        this.timelineDescription  = new GSAP.timeline()
+        this.timelineStudy  = new GSAP.timeline()
 
+        this.homePageClasses = [".hero-main-title", ".hero-main-description", ".hero-second-subheading", ".second-sub"]
 
         //window.removeEventListener("wheel",this.onScroll.bind(this))
 
@@ -33,7 +37,7 @@ export default class Preloader extends EventEmitter {
         convert(document.querySelector(".hero-main-description"));
         convert(document.querySelector(".hero-second-subheading"));
         convert(document.querySelector(".second-sub"));
-
+        this.timeline.set(".animatedis", { yPercent: 100 })
 
     }
 
@@ -43,13 +47,7 @@ export default class Preloader extends EventEmitter {
     //  }
 
 
-    reappearParameters(cssClass) {
-        return [cssClass + " .animatedis", {
-            yPercent: -100,
-            stagger: 0.05,
-            ease: "back.out(1.7)",
-        }]
-    }
+
 
 
     playIntro() {
@@ -87,7 +85,7 @@ export default class Preloader extends EventEmitter {
             })
             .to(...this.reappearParameters(".intro-text"))
             .to(".intro-text .animatedis", {
-                yPercent: 0,
+                yPercent: 100,
                 stagger: 0.05,
                 delay: 0.5,
                 ease: "back.out(1.7)",
@@ -149,12 +147,11 @@ export default class Preloader extends EventEmitter {
 
     playSecondIntro() {
         console.log("Second Intro init");
-        const timeline = new GSAP.timeline()
         const corridor = this.scene.children.find(children => children.name == 'Corridor');
 
         const setProperties = (object) => {
             if (object instanceof THREE.Mesh) {
-                timeline.to(object, {
+                this.timeline.to(object, {
                     transition: 1,
                     //ease: "power3.out(2)",
                     ease: 'none.none',
@@ -171,20 +168,19 @@ export default class Preloader extends EventEmitter {
         };
 
         recursiveSet(corridor.children, setProperties);
-        timeline.to(...this.reappearParameters(".hero-main-title"), "corridor")
-        timeline.to(...this.reappearParameters(".hero-main-description"), "corridor")
-        timeline.to(...this.reappearParameters(".hero-second-subheading"), "corridor")
-        timeline.to(...this.reappearParameters(".second-sub"), "corridor")
-      
+        this.homePageAppear();
+
+
         setTimeout(() => {
             console.log(this);
-            this.emit('enablecontrols');   
+            this.emit('enablecontrols');
             this.experience.world.lighting.showCorridor()
-            timeline.to(".arrow-svg-wrapper", { opacity: 1 })
-            timeline.to(".toggle-theme", { opacity: 1 })
-            timeline.to(".toggle-language", { opacity: 1 })
+            this.timeline.to(".arrow-svg-wrapper", { opacity: 1 })
+            this.timeline.to(".toggle-theme", { opacity: 1 })
+            this.timeline.to(".toggle-language", { opacity: 1 }, "<")
 
- 
+
+
 
         }, 6000)
 
@@ -201,5 +197,81 @@ export default class Preloader extends EventEmitter {
 
 
 
+    }
+
+    homePageAppear() {
+        this.homePageApply(this.reappearParameters)
+    }
+
+    homePageApply(callBack) {
+        console.log('HomePageApply')
+        console.log(this.timeline)
+        this.timeline.to(...callBack(".hero-main-title"), "corridor");
+        this.timeline.to(...callBack(".hero-main-description"), "<");
+        this.timeline.to(...callBack(".hero-second-subheading"), "<");
+        this.timeline.to(...callBack(".second-sub"), "<");
+    }
+    homePageDissappear() {
+        console.log('HomeDissapear')
+        this.homePageApply(this.dissapearParameters)
+    }
+
+    reappearParameters(cssClass, duration = 1, stagger = 0.05, delay = 0) {
+        console.log('duration', duration)
+        return [cssClass + " .animatedis", {
+            yPercent: 0,
+            stagger: stagger,
+            duration: duration,
+            delay: delay,
+            ease: "back.out(1.7)",
+        }]
+    }
+    dissapearParameters(cssClass, duration = 1, stagger = 0.05, delay = 0) {
+        return [cssClass + " .animatedis", {
+            yPercent: 100,
+            stagger: stagger,
+            duration: duration,
+            delay: delay,
+            ease: "back.out(1.7)",
+        }]
+    }
+
+    translateHome(language) {
+        //Horrible dont do at home
+        let descriptionText 
+        let studyText
+        if (language == 'es') {
+             descriptionText = 'Estudiante Avanzado de Ingenieria Informatica'
+             studyText = 'ESTUDIANDO EN'
+        }
+        else {
+             descriptionText = 'Advanced student of software engineering'
+             studyText = 'STUDYNG AT'
+        }
+
+        const description = document.querySelector(".hero-main-description");
+        const study = document.querySelector(".hero-second-subheading")
+        const tlDesc = this.timelineDescription
+        const tlStud = this.timelineStudy
+
+        tlDesc.to(...this.dissapearParameters(".hero-main-description", 0.5, 0.02)).then( () => {
+            console.log('Ia am heree')
+            description.innerHTML = descriptionText
+            convert(description);
+            tlDesc.set(".hero-main-description .animatedis ", { yPercent: 100 })
+            tlDesc.to(...this.reappearParameters(".hero-main-description", 0.5, 0.02));
+
+        });
+
+        tlStud.to(...this.dissapearParameters(".hero-second-subheading", 0.5)).then(() => {
+            console.log('translateHome')
+            study.innerHTML = studyText
+            convert(study);
+            tlStud.set(".hero-second-subheading .animatedis ", { yPercent: 100 })
+            tlStud.to(...this.reappearParameters(".hero-second-subheading", 0.5));
+
+        });
+
+        //convert(document.querySelector(".hero-second-subheading"));
     }
 }

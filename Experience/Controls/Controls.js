@@ -33,6 +33,7 @@ export default class Controls {
             this.page.style.overflow = "visible";
             GSAP.registerPlugin(ScrollTrigger);
             this.setThemeController();
+            this.setLanguageControllerHome()
             //this.smoothScroll = this.setupASScroll(); verificar que use PC
             this.setScrollController();
 
@@ -99,8 +100,27 @@ export default class Controls {
             document.body.classList.toggle("theme-dark");
             this.themeSwitch(this.theme.value)
         })
-
     }
+
+    setLanguageControllerHome() {
+       
+        const toggleButton = document.getElementById("language-button");
+        toggleButton.addEventListener("click", () => {
+            if (toggleButton.children[0].classList.contains('slide')){
+                this.preloader.translateHome('en')
+    
+            }
+            else{
+                this.preloader.translateHome('es')
+            }
+
+            // this.theme.value = this.theme.value === "dark" ? "light" : "dark";
+            // document.body.classList.toggle("theme-light");
+            // document.body.classList.toggle("theme-dark");
+            // this.themeSwitch(this.theme.value)
+        })
+    }
+
 
     themeSwitch(value) {
         console.log(this);

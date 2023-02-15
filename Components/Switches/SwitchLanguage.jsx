@@ -22,7 +22,7 @@ const SwitchLanguage = (props) => {
 
             </SymbolWrapper>
 
-            <ToggleButton onClick={onPressed} class="toggle-button">
+            <ToggleButton id='language-button' onClick={onPressed} class="toggle-button">
                 <div className={'toggle-circle' + (props.language == 'es' ? ' slide' : '')} />
             </ToggleButton>
 
