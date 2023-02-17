@@ -19,7 +19,7 @@ export default class Renderer {
     setRenderer() {
         this.renderer = new THREE.WebGLRenderer({
             canvas: this.canvas,
-            antialias: false,
+            antialias: true,
         });
 
         this.renderer.physicallyCorrectlights = true;
@@ -44,8 +44,7 @@ export default class Renderer {
         // this.renderer.setViewport(0, 0, this.sizes.width, this.sizes.height);
         //console.log("El ultimo ", this.camera.activeCamera);
         this.renderer.render(this.scene, this.camera.activeCamera);
-        console.log('calls: ',this.renderer.info.render.calls)
-
+        //console.log('calls: ',this.renderer.info.render.calls)
         // Second Screen
         // this.renderer.setScissorTest(true);
         // this.renderer.setViewport(

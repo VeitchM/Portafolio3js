@@ -413,6 +413,9 @@ p, h1, section,span,svg,button{
     left:20px;
   }
 
+  .arrow-svg-wrapper{
+    bottom: 50px;
+  }
   
   .hero-main{
     top:10%;
