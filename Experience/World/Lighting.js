@@ -47,7 +47,7 @@ export default class Lighting {
                     ease: 'none.none',
                     intensity: light.targIntensity,
                     duration: Math.random() * 2 + 1,
-                    delay: Math.random() * 2 + 4
+                    delay: Math.random() * 2 + 1
                 }
             )
         }
@@ -62,7 +62,7 @@ export default class Lighting {
 
         // }
         //addOneByOne(lights)
-        setTimeout(() => { this.scene.add(...lights) }, 3000);
+        setTimeout(() => { this.scene.add(...lights) }, 1000);
 
     }
     deve() {
@@ -169,21 +169,21 @@ export default class Lighting {
         const lightDesktopInt = 0.05
         const up = pointLight("up", 0x5787ff, .5 + .3, new THREE.Vector3(-6.8, 2.4, 4))
         up.castShadow = true
-        pointLight("down", 0x5787ff, .3, new THREE.Vector3(-7.2, 0.8, 3.8))
-        rectLight("topDesktop", 0xFFD9DD, .5, new THREE.Vector3(-6.75, 1.4, 4.959), 1.1, .6, new THREE.Vector3(0, -1, 0))
+        //pointLight("down", 0x5787ff, .1, new THREE.Vector3(-7.2, 0.8, 3.8))
+        //rectLight("topDesktop", 0xFFD9DD, .5, new THREE.Vector3(-6.75, 1.4, 4.959), 1.1, .6, new THREE.Vector3(0, -1, 0))
 
         //pointLight("topDesktop", 0xFEFFF0, lightDesktopInt * 3, new THREE.Vector3(-6.7113, 1.3725 - 0.1, 4.6715))
-        rectLight("booksDown", 0xB4C9FF, .5, new THREE.Vector3(-7.15, 1.7, 5), .5, .6, new THREE.Vector3(0, -1, 0))
+        //rectLight("booksDown", 0xB4C9FF, .5, new THREE.Vector3(-7.15, 1.7, 5), .5, .6, new THREE.Vector3(0, -1, 0))
 
         //pointLight("booksDown", 0xB4C9FF, lightDesktopInt, new THREE.Vector3(-7.057, 1.687, 4.958))
         //pointLight("booksUp", 0xB4C9FF, .5, new THREE.Vector3(-7.05, 1.9494, 4.9587))
-        rectLight("booksUp", 0xB4C9FF, 1, new THREE.Vector3(-7.15, 2.1, 5), .5, .6, new THREE.Vector3(0, -1, 0))
+        //rectLight("booksUp", 0xB4C9FF, 1, new THREE.Vector3(-7.15, 2.1, 5), .5, .6, new THREE.Vector3(0, -1, 0))
 
-        rectLight("helmet", 0xFFF200, .5, new THREE.Vector3(-6.4, 1.6871, 4.959), .6, .4, new THREE.Vector3(0, -1, 0))
+        //rectLight("helmet", 0xFFF200, .5, new THREE.Vector3(-6.4, 1.6871, 4.959), .6, .4, new THREE.Vector3(0, -1, 0))
 
-        rectLight("rope", 0xFFD9DD, .5, new THREE.Vector3(-6.4, 2, 4.959), .6, .6, new THREE.Vector3(0, -1, 0))
+       // rectLight("rope", 0xFFD9DD, .5, new THREE.Vector3(-6.4, 2, 4.959), .6, .6, new THREE.Vector3(0, -1, 0))
 
-        rectLight("window", 0xfffbdd, 4, new THREE.Vector3(-7.9, 1.17, 4.14785), 1.87, 1.87, new THREE.Vector3(1, 0, 0))
+        rectLight("window", 0xfffbdd, 5, new THREE.Vector3(-7.9, 1.17, 4.14785), 1.87, 1.87, new THREE.Vector3(1, 0, 0))
 
 
 
