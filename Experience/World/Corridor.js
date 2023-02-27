@@ -8,8 +8,13 @@ export default class Corridor {
         this.scene = this.experience.scene;
         this.resources = this.experience.resources;
         this.corridor = this.resources.items.corridor;
-        this.corridor.scene.name = "Corridor"
-
+        this.corridorOptimized = this.resources.items.corridorOptimized;
+        this.corridorOptimized.scene.name = this.corridor.scene.name = "Corridor"
+        
+        
+        
+        
+        recursiveSet(this.corridorOptimized.scene.children, this.setShadows)
         this.setModel();
 
         this.scene.add(this.corridor.scene)
@@ -17,13 +22,44 @@ export default class Corridor {
 
 
 
-        console.log("cube")
         console.log('Corridor: ', this.corridor)
         console.log('Scene: ', this.scene)
 
     }
 
+    showCorridorOptimized(){
+     console.log('Corridor Optimized')
+     console.log('Scene before',this.scene)
 
+     const children = this.scene.children 
+     const isCorridor = (child) => child.name ==='Corridor'  
+     const newChildren = []
+        children.forEach((element)=>{
+            if(!isCorridor(element))
+                newChildren.push(element)
+        })
+    this.scene.children = newChildren;
+    this.scene.add(this.corridorOptimized.scene)
+    console.log('Scene before',this.scene)
+
+    }
+    /*
+    it s not possible, the method called merge meshes just merge geometryes, so materials are lost
+    sceneToOneMesh(scene){
+        console.log('sceneToConvert', scene)
+        const meshes = []
+        const addMeshes = (object) => {
+            if (object.type === 'Mesh'){
+                meshes.push(object)
+            }
+        }
+        recursiveSet(scene.children,addMeshes)
+        console.log('Meshes', meshes)
+        const unifiedMesh = new THREE.Mesh(...meshes)
+        console.log(unifiedMesh)
+        return unifiedMesh;
+    }
+    */
 
     static objectTransition(object) {
         object.position.addVectors(
@@ -32,22 +68,22 @@ export default class Corridor {
         object.scale.copy(
             object.originalScale.clone().multiplyScalar(object.transition))
     }
+    
+     setShadows = (object) => {
+        //console.log(object);
 
+        object.castShadow = true;
+        object.receiveShadow = true;
+    }
     setModel() {
 
 
 
-        const setShadows = (object) => {
-            //console.log(object);
-
-            object.castShadow = true;
-            object.receiveShadow = true;
-        }
 
 
         const setProperties = (object) => {
             if (object instanceof THREE.Mesh) {
-                setShadows(object);
+                this.setShadows(object);
                 object.transition = 0
                 object.originalScale = object.scale.clone();
                 object.originalPosition = object.position.clone();

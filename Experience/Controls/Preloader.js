@@ -56,7 +56,6 @@ export default class Preloader extends EventEmitter {
 
 
         const frameIndex = (name) => { return this.camera.frameIndex(name) }
-        console.log("intro2", frameIndex("intro2"));
         const timeline = this.camera.timeline
 
 
@@ -127,7 +126,6 @@ export default class Preloader extends EventEmitter {
         },)
 
 
-        console.log("playIntro");
 
 
     }
@@ -146,7 +144,6 @@ export default class Preloader extends EventEmitter {
     }
 
     playSecondIntro() {
-        console.log("Second Intro init");
         const corridor = this.scene.children.find(children => children.name == 'Corridor');
 
         const setProperties = (object) => {
@@ -161,7 +158,6 @@ export default class Preloader extends EventEmitter {
                     onUpdate: () => { Corridor.objectTransition(object); }
                 }, "corridor")
 
-                console.log('algo');
 
             }
 
@@ -172,8 +168,8 @@ export default class Preloader extends EventEmitter {
 
 
         setTimeout(() => {
-            console.log(this);
             this.emit('enablecontrols');
+            this.experience.world.corridor.showCorridorOptimized()
             this.experience.world.lighting.showCorridor()
             this.timeline.to(".arrow-svg-wrapper", { opacity: 1 })
             this.timeline.to(".toggle-theme", { opacity: 1 })
@@ -182,7 +178,7 @@ export default class Preloader extends EventEmitter {
 
 
 
-        }, 6000)
+        }, 8000)
 
 
 
@@ -204,7 +200,6 @@ export default class Preloader extends EventEmitter {
     }
 
     homePageApply(callBack) {
-        console.log('HomePageApply')
         console.log(this.timeline)
         this.timeline.to(...callBack(".hero-main-title"), "corridor");
         this.timeline.to(...callBack(".hero-main-description"), "<");
@@ -212,12 +207,10 @@ export default class Preloader extends EventEmitter {
         this.timeline.to(...callBack(".second-sub"), "<");
     }
     homePageDissappear() {
-        console.log('HomeDissapear')
         this.homePageApply(this.dissapearParameters)
     }
 
     reappearParameters(cssClass, duration = 1, stagger = 0.05, delay = 0) {
-        console.log('duration', duration)
         return [cssClass + " .animatedis", {
             yPercent: 0,
             stagger: stagger,
@@ -255,7 +248,6 @@ export default class Preloader extends EventEmitter {
         const tlStud = this.timelineStudy
 
         tlDesc.to(...this.dissapearParameters(".hero-main-description", 0.5, 0.02)).then( () => {
-            console.log('Ia am heree')
             description.innerHTML = descriptionText
             convert(description);
             tlDesc.set(".hero-main-description .animatedis ", { yPercent: 100 })

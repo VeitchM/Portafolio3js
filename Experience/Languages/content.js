@@ -107,5 +107,4 @@ sections[2].en = Section.sectContent(
     ]
 )
 
-//console.log(sections[2].es)
 export default sections
