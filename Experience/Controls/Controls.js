@@ -88,7 +88,7 @@ export default class Controls {
 
 
 
-
+    // TODO Should be modified with redux
     setThemeController() {
         this.theme = {};
         const toggleButton = this.theme.toggleButton = document.getElementById("theme-button");
@@ -102,6 +102,8 @@ export default class Controls {
         })
     }
 
+    // TODO Should be modified with redux
+    
     setLanguageControllerHome() {
        
         const toggleButton = document.getElementById("language-button");
@@ -195,6 +197,8 @@ export default class Controls {
     }
 
     setProgressBar() {
+
+        //This is for the progress bars at the sides on the sections, it could be done at the section component
         this.sections = document.querySelectorAll(".section");
         this.sections.forEach((section) => {
             this.progressWrapper =
@@ -211,25 +215,25 @@ export default class Controls {
                         scrub: 0.6,
                     },
                 });
-                GSAP.to(section, {
-                    borderBottomLeftRadius: 700,
-                    scrollTrigger: {
-                        trigger: section,
-                        start: "bottom bottom",
-                        end: "bottom top",
-                        scrub: 0.6,
-                    },
-                });
+                // GSAP.to(section, {
+                //     borderBottomLeftRadius: 700,
+                //     scrollTrigger: {
+                //         trigger: section,
+                //         start: "bottom bottom",
+                //         end: "bottom top",
+                //         scrub: 0.6,
+                //     },
+                // });
             } else {
-                GSAP.to(section, {
-                    borderTopRightRadius: 10,
-                    scrollTrigger: {
-                        trigger: section,
-                        start: "top bottom",
-                        end: "top top",
-                        scrub: 0.6,
-                    },
-                });
+                // GSAP.to(section, {
+                //     borderTopRightRadius: 10,
+                //     scrollTrigger: {
+                //         trigger: section,
+                //         start: "top bottom",
+                //         end: "top top",
+                //         scrub: 0.6,
+                //     },
+                // });
                 GSAP.to(section, {
                     borderBottomRightRadius: 700,
                     scrollTrigger: {
