@@ -40,33 +40,27 @@ export default function Home() {
             },
           }}
         >
-          <div className="text-7xl flex whitespace-pre-wrap">
-            {name.split("").map((letter, index) => {
-              return (
-                <motion.p key={index} variants={itemVariants}>
-                  {letter}
-                </motion.p>
-              );
-            })}
-          </div>
-
-          <div
-            onClick={() => setIsOpen((prev) => !prev)}
-            className="text-xl flex whitespace-pre-wrap"
-          >
-            {subtitle.split("").map((letter, index) => {
-              return (
-                <motion.p key={index} variants={itemVariants}>
-                  {letter}
-                </motion.p>
-              );
-            })}
-          </div>
+          <AnimatedText text={name} className="text-7xl" />
+          <AnimatedText className="text-xl" text={subtitle} />
         </motion.div>
       </section>
       <section className=" w-screen h-24 fixed bottom-0 z-40">
         <div className="bg-blue-100/80 w-80 m-auto h-full rounded-full " />
       </section>
     </>
+  );
+}
+
+function AnimatedText(props: { text: string; className?: string }) {
+  return (
+    <div className={`whitespace-pre-wrap flex ${props.className}`}>
+      {props.text.split("").map((letter, index) => {
+        return (
+          <motion.p key={index} variants={itemVariants}>
+            {letter}
+          </motion.p>
+        );
+      })}
+    </div>
   );
 }
