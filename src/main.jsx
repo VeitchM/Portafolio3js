@@ -1,5 +1,4 @@
 import '../style.css'
-import './index.css'
 import Experience from '../Experience/Experience';
 import React from 'react';
 import App from './App';

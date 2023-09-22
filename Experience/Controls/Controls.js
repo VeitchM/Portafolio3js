@@ -27,17 +27,14 @@ export default class Controls {
         this.page = document.querySelector(".page")
         this.page.style.visibility = "visible";
 
-
-
-        this.preloader.on("enablecontrols", () => {
-            this.page.style.overflow = "visible";
-            GSAP.registerPlugin(ScrollTrigger);
-            this.setThemeController();
-            this.setLanguageControllerHome()
-            //this.smoothScroll = this.setupASScroll(); verificar que use PC
-            this.setScrollController();
-
-        })
+        
+        this.setLanguageControllerHome()
+        this.setThemeController();
+        
+        this.page.style.overflow = "visible";
+        GSAP.registerPlugin(ScrollTrigger);
+        this.setScrollController();
+   
 
     }
 

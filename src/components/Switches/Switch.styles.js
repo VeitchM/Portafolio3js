@@ -8,7 +8,7 @@ export const Wrapper1 = styled.div`
     top: 48px;
     right: 48px;
     z-index: 99999;
-    opacity: 0;
+    opacity: 1;
     color: var(--primary-color);
 
     @media screen and ( max-width: 968px){
