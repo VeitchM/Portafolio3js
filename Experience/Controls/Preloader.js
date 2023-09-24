@@ -1,5 +1,5 @@
 import { EventEmitter } from "events";
-import Experience from "../Experience.js";
+import Experience from "../Experience";
 import GSAP from "gsap";
 import * as THREE from "three";
 import { Vector3 } from "three";

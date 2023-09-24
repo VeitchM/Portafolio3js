@@ -1,7 +1,7 @@
 import EventEmitter from "events";
 import * as THREE from "three";
 import { floorPowerOfTwo } from "three/src/math/MathUtils.js";
-import Experience from "../Experience.js";
+import Experience from "../Experience";
 import Corridor from './Corridor'
 import Lighting from "./Lighting"
 
