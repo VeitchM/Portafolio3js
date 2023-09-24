@@ -1,7 +1,6 @@
 import { EventEmitter } from "events";
 import Experience from "../Experience.js";
 import GSAP from "gsap";
-import convert from "../Utils/covertDivsToSpans.js";
 import * as THREE from "three";
 import { Vector3 } from "three";
 import recursiveSet from "../Utils/recursiveSet.js";
@@ -20,12 +19,7 @@ export default class Preloader extends EventEmitter {
     this.timelineDescription = new GSAP.timeline();
     this.timelineStudy = new GSAP.timeline();
 
-    this.homePageClasses = [
-      ".hero-main-title",
-      ".hero-main-description",
-      ".hero-second-subheading",
-      ".second-sub",
-    ];
+
 
     //window.removeEventListener("wheel",this.onScroll.bind(this))
 
@@ -37,11 +31,7 @@ export default class Preloader extends EventEmitter {
   }
 
   setAssets() {
-    convert(document.querySelector(".intro-text"));
-    convert(document.querySelector(".hero-main-title"));
-    convert(document.querySelector(".hero-main-description"));
-    convert(document.querySelector(".hero-second-subheading"));
-    convert(document.querySelector(".second-sub"));
+   
     this.timeline.set(".animatedis", { yPercent: 100 });
   }
 
@@ -59,12 +49,7 @@ export default class Preloader extends EventEmitter {
     const timeline = this.camera.timeline;
 
     timeline
-      .to(".preloader", {
-        opacity: 0,
-        onComplete: () => {
-          document.querySelector(".preloader").remove();
-        },
-      })
+   
       .to(this.introCube.scale, {
         x: 1,
         y: 1,
@@ -239,44 +224,5 @@ export default class Preloader extends EventEmitter {
     ];
   }
 
-  translateHome(language) {
-    //Horrible dont do at home
-    let descriptionText;
-    let studyText;
-    if (language == "es") {
-      descriptionText = "Estudiante Avanzado de Ingenieria Informatica";
-      studyText = "ESTUDIANDO EN";
-    } else {
-      descriptionText = "Advanced student of software engineering";
-      studyText = "STUDYNG AT";
-    }
-
-    const description = document.querySelector(".hero-main-description");
-    const study = document.querySelector(".hero-second-subheading");
-    const tlDesc = this.timelineDescription;
-    const tlStud = this.timelineStudy;
-
-    tlDesc
-      .to(...this.dissapearParameters(".hero-main-description", 0.5, 0.02))
-      .then(() => {
-        description.innerHTML = descriptionText;
-        convert(description);
-        tlDesc.set(".hero-main-description .animatedis ", { yPercent: 100 });
-        tlDesc.to(
-          ...this.reappearParameters(".hero-main-description", 0.5, 0.02)
-        );
-      });
-
-    tlStud
-      .to(...this.dissapearParameters(".hero-second-subheading", 0.5))
-      .then(() => {
-        console.log("translateHome");
-        study.innerHTML = studyText;
-        convert(study);
-        tlStud.set(".hero-second-subheading .animatedis ", { yPercent: 100 });
-        tlStud.to(...this.reappearParameters(".hero-second-subheading", 0.5));
-      });
-
-    //convert(document.querySelector(".hero-second-subheading"));
-  }
+  
 }

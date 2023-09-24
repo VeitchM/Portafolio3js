@@ -7,6 +7,7 @@ import "../style.css";
 
 import testSect from "../Experience/Languages/content";
 import Home from "./components/Home/Home";
+import LanguageContext from "./language";
 
 const ThemeContext = createContext<"light" | "dark">("light");
 
@@ -25,16 +26,19 @@ const App = () => {
   console.log("Exectuted before render");
   return (
     <>
-      <ThemeContext.Provider value={"light"}></ThemeContext.Provider>
-      <div className="mt-24"></div>
-      <Home />
-      <SwitchTheme />
-      <SwitchLanguage setLanguage={setLanguage} language={language} />
+      <ThemeContext.Provider value={"light"}>
+        <LanguageContext.Provider value={language}>
+          {/* <div className="mt-24"></div> */}
+          <Home />
+          <SwitchTheme />
+          <SwitchLanguage setLanguage={setLanguage} language={language} />
 
-      <Section text={sections[0]} number={1} />
-      <Section text={sections[1]} number={2} />
-      <Section text={sections[2]} number={3} />
-      <div className=""> </div>
+          <Section text={sections[0]} number={1} />
+          <Section text={sections[1]} number={2} />
+          <Section text={sections[2]} number={3} />
+          <div className=""> </div>
+        </LanguageContext.Provider>
+      </ThemeContext.Provider>
     </>
   );
 };

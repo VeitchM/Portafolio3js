@@ -17,13 +17,13 @@ body {
 
 .experience {
   position: fixed;
-  width: 100vw;
-  height: 100vh;
+  /* width: 100vw; */
+  /* height: 50vh; */
 }
 
 .experience-canvas {
-  width: 100%;
-  height: 100%;
+  /* width: 100%; */
+  /* height: 100%; */
 }
 
 p,
@@ -38,12 +38,11 @@ button {
 }
 
 :root {
-  --white: #e7e2d5;
-  --black: #242424;
+  --white: 231 226 213;
 
-  /* Light theme */
-  --primary-color: #b6862c;
-  --secondary-color: rgb(120, 78, 145);
+  --black: 36 36 36;
+  --primary-color: 182 134 44;
+  --secondary-color: 120 78 145;
 }
 
 .theme-light {
@@ -53,7 +52,7 @@ button {
 
 .theme-dark {
   --color-text: var(--white);
-  --color-background: #3e4277;
+  --color-background: 62 66 119;
   --primary-color: var(--white);
 }
 
@@ -68,7 +67,7 @@ button {
 }
 
 .page-wrapper {
-  color: var(--color-text);
+  color: rgb(var(--color-text));
   position: relative;
 }
 
@@ -79,7 +78,7 @@ button {
   border-radius: 50%;
   width: 20px;
   height: 20px;
-  background-color: var(--color-background);
+  background-color: rgb(var(--color-background));
   transition: all 0.2s ease-in-out;
 }
 
@@ -111,7 +110,7 @@ button {
 
 .hero-main-title {
   font-size: 64px;
-  /* color: var(--color-text); */
+  /* color: rgb(var(--color-text)); */
 }
 
 .hero-main-description {
@@ -157,10 +156,10 @@ Progress bars
 } */
 
 /* Section Formating -------------------------------------------------------------*/
-.section-margin {
-  height: 1100px;
+/* .section-margin {
+  height: 100px;
   width: 100%;
-}
+} */
 /* 
 .section {
   position:relative;
@@ -294,7 +293,7 @@ Progress bars
   left: 40%;
   font-weight: 500;
   font-size: 16px;
-  color: var(--color-text);
+  color: rgb(var(--color-text));
   /* transform: translate(-50%, -50%); */
 }
 
@@ -302,7 +301,7 @@ Progress bars
   position: absolute;
   bottom: 20px;
   left: 50%;
-  color: var(--color-text);
+  color: rgb(var(--color-text));
   transform: translate(-50%, -50%);
   animation: bounce 0.5s ease-in alternate infinite;
   display: flex;
@@ -426,7 +425,6 @@ Progress bars
     font-size: 18px;
   }
 }
-
 
 h1 {
   font-size: 80px;

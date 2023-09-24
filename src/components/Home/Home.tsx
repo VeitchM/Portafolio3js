@@ -1,5 +1,10 @@
-import React, { useState } from "react";
+import React, { MutableRefObject, useEffect, useRef, useState } from "react";
+
+
+
 import { motion, Variants } from "framer-motion";
+import { useLanguage } from "../../hooks/useLanguage";
+import ScrollArrow from "../ScrollArrow";
 
 const itemVariants: Variants = {
   open: {
@@ -10,23 +15,70 @@ const itemVariants: Variants = {
   closed: { opacity: 0, y: 20, transition: { duration: 0.2 } },
 };
 
+const subtitleDict = {
+  en: "Advanced student of software engineering",
+  es: "Estudiante avanzado de ingenieria informatica",
+};
+
+const subtitle2Dict = {
+    en: "studying at UNMDP",
+    es: "estudiando en UNDMP",
+  };
+
+const OPEN_DURATION: number = 0.7;
+const CLOSE_DURATION: number = 0.3;
+
 export default function Home() {
   const name = "Matias Veitch";
-  const subtitle = "Advanced student of software engineering";
-  const [isOpen, setIsOpen] = useState(false);
+
+  const language = useLanguage();
+
+  const [subtitle, setSubtitle] = useState(
+    subtitleDict[language]
+  );
+  const [subtitle2, setSubtitle2] = useState(
+    subtitle2Dict[language]
+  );
+
+
+
+  const [isOpen, setIsOpen] = useState("open");
+
+  useEffect(() => {
+    transitionOnSet(() => {setSubtitle(subtitleDict[language])
+        setSubtitle2(subtitle2Dict[language])
+    });
+  }, [language]);
+
+  function transitionOnSet(setter: () => void) {
+    setIsOpen("closed");
+    setTimeout(
+      () => {
+        setter();
+        setIsOpen("open");
+      },
+      CLOSE_DURATION * 1000 * 1.4
+    );
+  }
+
+  const nameRef = useRef(null)
 
   return (
+    // it will be cool a fade out when start to go off screen
     <>
-      <section className="w-screen h-screen">
+
+      <section className="w-screen h-screen p-24 pt-4 lg:pt-24">
         <motion.div
           initial="closed"
-          animate="open"
+          className="w-full h-full flex flex-col relative"
+          whileInView={isOpen}
+          viewport={{ amount: 0.8 }}
           variants={{
             open: {
               transition: {
                 type: "spring",
                 bounce: 0,
-                duration: 0.7,
+                duration: OPEN_DURATION,
                 delayChildren: 0.3,
                 staggerChildren: 0.05,
               },
@@ -35,25 +87,37 @@ export default function Home() {
               transition: {
                 type: "spring",
                 bounce: 0,
-                duration: 0.3,
+                duration: CLOSE_DURATION,
               },
             },
           }}
         >
-          <AnimatedText text={name} className="text-7xl" />
-          <AnimatedText className="text-xl" text={subtitle} />
+          <AnimatedText ref={nameRef} text={name} className="text-3xl lg:text-7xl" />
+          <AnimatedText className="text-xs lg:text-xl" text={subtitle} />
+          <AnimatedText
+            className="text-xs lg:text-lg absolute bottom-0 right-0"
+            text={subtitle2}
+          />
         </motion.div>
       </section>
-      <section className=" w-screen h-24 fixed bottom-0 z-40">
-        <div className="bg-blue-100/80 w-80 m-auto h-full rounded-full " />
+      <section className=" w-screen h-16 fixed bottom-0 lg:top-0 z-40">
+        <motion.div className="bg-primary w-screen m-auto h-full   shadow-black/50 drop-shadow-lg hover:rounded-t-md hover:drop-shadow-xl transition-all rounded-t-[80px]" 
+        initial={{opacity:0}}
+        animate={{opacity:1}}
+        transition={{duration:1,delay:1}}/>
       </section>
+      <ScrollArrow/>
     </>
   );
 }
 
-function AnimatedText(props: { text: string; className?: string }) {
+function AnimatedText(props: { text: string; className?: string, ref?:MutableRefObject<null> }) {
+  const [prevText, setPrevText] = useState("");
+  const [anim, setAnim] = useState("");
+
+  useEffect(() => {}, [props.text]);
   return (
-    <div className={`whitespace-pre-wrap flex ${props.className}`}>
+    <div  ref={props.ref} className={`whitespace-pre-wrap flex ${props.className}`}>
       {props.text.split("").map((letter, index) => {
         return (
           <motion.p key={index} variants={itemVariants}>

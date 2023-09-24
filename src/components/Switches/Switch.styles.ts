@@ -9,7 +9,7 @@ export const Wrapper1 = styled.div`
     right: 48px;
     z-index: 99999;
     opacity: 1;
-    color: var(--primary-color);
+    color: rgb(var(--primary-color));
 
     @media screen and ( max-width: 968px){
         right: 13px;
@@ -44,7 +44,7 @@ cursor: pointer;
   border-radius: 50px;
   margin: 0px 8px;
   border: none;
-  color: var(--primary-color);
+  color: rgb(var(--primary-color));
   background-color: currentColor;
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
   
