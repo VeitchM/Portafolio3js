@@ -7,7 +7,6 @@ const Section = (props: { text: Section; number: number }) => {
   const number = props.number;
 
   //Cardinal-move is used to trigger three.js animation
-  const cardinal = ["", "first", "second", "third"];
   const side = number % 2 == 0 ? "right" : "left";
   const right = side === "right";
 
@@ -46,8 +45,6 @@ const Section = (props: { text: Section; number: number }) => {
 
   return (
     <>
-      {/* BLANK SPACE FOR ANIMATION */}
-      <div className={"section-margin " + cardinal[number] + "-move" + (number?' h-screen ':'')} />
 
       <motion.section
         ref={ref}

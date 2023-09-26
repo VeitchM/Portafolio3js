@@ -8,10 +8,9 @@ import { GroupProps } from "@react-three/fiber";
 export default function Phone(props: { ref?: GroupProps["ref"] }) {
   const { nodes, materials } = useGLTF("/models/iphoneForPage.gltf") as any;
 
-  const texture = useVideoTexture("/videos/nexum.mp4")
-  console.log({texture});
-  
-
+  const texture = useVideoTexture("/videos/pastechPT.webm");
+  // const texture = useVideoTexture("/videos/nexum.mp4");
+  console.log({ texture });
 
   return (
     <group>
@@ -19,7 +18,7 @@ export default function Phone(props: { ref?: GroupProps["ref"] }) {
         castShadow
         receiveShadow
         geometry={nodes.cellphone.geometry}
-        material={materials["Phone Color Light"]}
+        material={materials.PhoneColorLight}
       />
       <mesh
         castShadow
@@ -30,6 +29,8 @@ export default function Phone(props: { ref?: GroupProps["ref"] }) {
       <mesh
         castShadow
         receiveShadow
+        // onClick={() => console.log("MeralCellphoneClicked")}
+        // onWheel={()=>{console.log("wheel over")}}
         geometry={nodes.cellphone_2.geometry}
         material={materials.Metal}
       />

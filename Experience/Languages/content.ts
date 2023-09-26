@@ -141,6 +141,110 @@ French - speaking country where I lived with a local family and attended the loc
       ],
     ]) as Section,
   },
+  {
+    es: Section.sectContent("Desarrollo movil", [
+      [
+        "Proyecto Pastech",
+        "Se desarrollo una aplicacion en el marco de la wadw del ambito agropecuario",
+        "A principios de 2023, comencé a tomar cursos para comprender las redes neuronales profundas (DNN), las redes neuronales convolutionales (CNN) y el uso práctico de TensorFlow.",
+        "Hasta ahora he completado el curso provisto por FreeCodeCamp de Machine Learning con Python",
+    
+      ],
+
+      [
+        "Desarrollo para la compañia Lyrtron",
+        "A los 15 años comenzar a utilizar herramientas de modelado 3D y desde entonces he\
+            hecho un cercano seguimiento respecto a las tecnologias para la generacion de imagenes por computadora",
+        "En este seguimiento he aprendido habilidades utiles como el modelado, renderizado,\
+            animacion, rigging, simulacion, mapeo de texturas y creacion de shaders en blender.",
+        "Todos los objetos de esta pagina los he hecho en blender. ",
+      ],
+      [
+        "Godot",
+        "He aprendido por cuenta propia y comenzado a desarrollar con fines didacticos un\
+            videojuego con modo LAN funcional, graficos 3D y animaciones implementadas, actualmente el proyecto esta\
+            pausado por ordenamiento de prioridades.",
+      ],
+    ]) as Section,
+
+    en: Section.sectContent("Work", [
+      [
+        "Machine Learning",
+        "I am currently highly interested in Machine Learning and its applications",
+        "In early 2023, I started taking courses to gain a deeper understanding of DNNs, CNNs, and practical use of TensorFlow",
+        "So far, I have completed the Machine Learning with Python course provided by FreeCodeCamp",
+        Section.link(
+          "FreeCodeCamp Certificate",
+          "https://www.freecodecamp.org/certification/fcc630df60e-4a43-4c1a-b035-69b001883eb1/machine-learning-with-python-v7"
+        ),
+      ],
+
+      [
+        "Blender",
+        "I started using 3D modeling tools at the age of 15, and since then I have been closely following the technologies for computer-generated images",
+        "Through my interest in this field, I have learned useful skills such as modeling, rendering, animation, rigging, simulation, texture mapping, and shader creation in Blender",
+        "All of the objects on this website were created by me using Blender.",
+      ],
+
+      [
+        "Godot",
+        "I have self-taught myself and started developing a LAN functional video game with 3D graphics and implemented animations, currently the project is on hold due to prioritization.",
+      ],
+    ]) as Section,
+  },
+
+  
+  {
+    es: Section.sectContent("Desarrollo Web", [
+      [
+        "Sobre esta pagina",
+        "Se desarrollo una aplicacion en el marco de la wadw del ambito agropecuario",
+        "A principios de 2023, comencé a tomar cursos para comprender las redes neuronales profundas (DNN), las redes neuronales convolutionales (CNN) y el uso práctico de TensorFlow.",
+        "Las tecnologias utilizas han sido react, three.js/fiber three dei y framer motion",
+    
+      ],
+
+      [
+        "Desarrollo para la compañia Lyrtron",
+        "A los 15 años comenzar a utilizar herramientas de modelado 3D y desde entonces he\
+            hecho un cercano seguimiento respecto a las tecnologias para la generacion de imagenes por computadora",
+        "ÇÇÇMostrar iFRAME del lo que hay de la compañia actualmenteÇÇÇ\
+            animacion, rigging, simulacion, mapeo de texturas y creacion de shaders en blender.",
+        "Todos los objetos de esta pagina los he hecho en blender. ",
+      ],
+      [
+        "Godot",
+        "He aprendido por cuenta propia y comenzado a desarrollar con fines didacticos un\
+            videojuego con modo LAN funcional, graficos 3D y animaciones implementadas, actualmente el proyecto esta\
+            pausado por ordenamiento de prioridades.",
+      ],
+    ]) as Section,
+
+    en: Section.sectContent("Work", [
+      [
+        "Machine Learning",
+        "I am currently highly interested in Machine Learning and its applications",
+        "In early 2023, I started taking courses to gain a deeper understanding of DNNs, CNNs, and practical use of TensorFlow",
+        "So far, I have completed the Machine Learning with Python course provided by FreeCodeCamp",
+        Section.link(
+          "FreeCodeCamp Certificate",
+          "https://www.freecodecamp.org/certification/fcc630df60e-4a43-4c1a-b035-69b001883eb1/machine-learning-with-python-v7"
+        ),
+      ],
+
+      [
+        "Blender",
+        "I started using 3D modeling tools at the age of 15, and since then I have been closely following the technologies for computer-generated images",
+        "Through my interest in this field, I have learned useful skills such as modeling, rendering, animation, rigging, simulation, texture mapping, and shader creation in Blender",
+        "All of the objects on this website were created by me using Blender.",
+      ],
+
+      [
+        "Godot",
+        "I have self-taught myself and started developing a LAN functional video game with 3D graphics and implemented animations, currently the project is on hold due to prioritization.",
+      ],
+    ]) as Section,
+  },
 ];
 
 export default sections;

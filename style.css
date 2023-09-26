@@ -17,6 +17,7 @@ body {
 
 .experience {
   position: fixed;
+  z-index: -10;
   /* width: 100vw; */
   /* height: 50vh; */
 }
@@ -38,7 +39,8 @@ button {
 }
 
 :root {
-  --white: 231 226 213;
+  --white: 249 237 219;
+  --whitest: 255 246 233;
 
   --black: 36 36 36;
   --primary-color: 182 134 44;
@@ -48,11 +50,14 @@ button {
 .theme-light {
   --color-text: var(--black);
   --color-background: var(--white);
+  --color-background-variant: var(--whitest);
 }
 
 .theme-dark {
   --color-text: var(--white);
   --color-background: 62 66 119;
+  --color-background-variant: 82 86 139 ;
+
   --primary-color: var(--white);
 }
 

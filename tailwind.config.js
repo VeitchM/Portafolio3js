@@ -9,7 +9,8 @@ export default {
       colors: {
         "primary": "rgb(var(--primary-color) / <alpha-value>)",
         "text-color": "rgb(var(--color-text) / <alpha-value>)",
-        "background-color": "rgb(var(--color-background) / <alpha-value>)"
+        "background-color": "rgb(var(--color-background) / <alpha-value>)",
+        "background-variant": "rgb(var(--color-background-variant) / <alpha-value>)"
       },
     },
   },

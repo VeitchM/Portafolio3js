@@ -9,6 +9,7 @@ import testSect from "../Experience/Languages/content";
 import Home from "./components/Home/Home";
 import LanguageContext from "./language";
 import MobileApp from "./components/MobileApp/MobileApp";
+import AnimationDivider from "./components/AnimationDivider";
 
 const ThemeContext = createContext<"light" | "dark">("light");
 
@@ -22,7 +23,7 @@ const App = () => {
   );
 
   useEffect(() => {
-    // new Experience(document.querySelector(".experience-canvas"));
+    new Experience(document.querySelector(".experience-canvas"));
   }, []);
   console.log("Exectuted before render");
   return (
@@ -30,14 +31,22 @@ const App = () => {
       <ThemeContext.Provider value={"light"}>
         <LanguageContext.Provider value={language}>
           {/* <div className="mt-24"></div> */}
-          {/* <Home />
+          <Home />
           <SwitchTheme />
           <SwitchLanguage setLanguage={setLanguage} language={language} />
-
+          <AnimationDivider number={0} />
           <Section text={sections[0]} number={1} />
+
+          <AnimationDivider number={1} />
           <Section text={sections[1]} number={2} />
-          <Section text={sections[2]} number={3} /> */}
-          <MobileApp/>
+
+          <AnimationDivider number={2} />
+          <Section text={sections[2]} number={3} />
+
+          <AnimationDivider number={3} />
+          {/* <Section text={sections[3]} number={4} /> */}
+          <MobileApp section={sections[3]} />
+
           <div className=""> </div>
         </LanguageContext.Provider>
       </ThemeContext.Provider>

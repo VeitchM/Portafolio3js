@@ -8,7 +8,7 @@ export default class Resources extends EventEmitter {
     constructor(assets) {
         super()
         this.experience = Experience.getInstance();
-        // this.renderer = this.experience.renderer; // is it neccesary?
+        // this.renderer = this.experience.renderer; // is it neccesary? doesnt looks like
         this.assets = assets;
 
 
