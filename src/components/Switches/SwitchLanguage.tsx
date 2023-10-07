@@ -3,13 +3,14 @@ import { Wrapper1, SymbolWrapper, ToggleButton } from "./Switch.styles";
 import { useLanguage } from "../../hooks/useLanguage";
 import { Language, Languages } from "../../language";
 import { motion } from "framer-motion";
+import Switch from "./SwitchButton";
 const SwitchLanguage = (props: {
   setLanguage: Dispatch<React.SetStateAction<Language>>;
   language: Language;
 }) => {
   console.log(props);
 
-  const onPressed = () => {
+  const onClick = () => {
     props.setLanguage((language) => (language == Languages.es  ? Languages.en  : Languages.es ));
   };
 
@@ -28,16 +29,7 @@ const SwitchLanguage = (props: {
           <p>EN</p>
         </SymbolWrapper>
 
-        <ToggleButton 
-          id="language-button"
-          onClick={onPressed}
-        >
-          <div
-            className={
-              "toggle-circle" + (props.language == Languages.es ? " slide" : "")
-            }
-          />
-        </ToggleButton>
+        <Switch switch={props.language == Languages.es } onClick={onClick}/>
 
         <SymbolWrapper>
           <p>ES</p>

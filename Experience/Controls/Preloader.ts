@@ -3,8 +3,8 @@ import Experience from "../Experience";
 import GSAP from "gsap";
 import * as THREE from "three";
 import { Vector3 } from "three";
-import recursiveSet from "../Utils/recursiveSet.js";
-import Corridor from "../World/Corridor.js";
+import recursiveSet from "../Utils/recursiveSet";
+import Corridor from "../World/Corridor";
 
 export default class Preloader extends EventEmitter {
   constructor() {
@@ -19,8 +19,6 @@ export default class Preloader extends EventEmitter {
     this.timelineDescription = new GSAP.timeline();
     this.timelineStudy = new GSAP.timeline();
 
-
-
     //window.removeEventListener("wheel",this.onScroll.bind(this))
 
     this.setAssets();
@@ -31,7 +29,6 @@ export default class Preloader extends EventEmitter {
   }
 
   setAssets() {
-   
     this.timeline.set(".animatedis", { yPercent: 100 });
   }
 
@@ -49,7 +46,7 @@ export default class Preloader extends EventEmitter {
     const timeline = this.camera.timeline;
 
     timeline
-   
+
       .to(this.introCube.scale, {
         x: 1,
         y: 1,
@@ -66,7 +63,7 @@ export default class Preloader extends EventEmitter {
           this.camera.updateActualFrame();
         },
       })
-      .to(...this.reappearParameters(".intro-text"))
+      // .to(...this.reappearParameters(".intro-text"))
       .to(
         ".intro-text .animatedis",
         {
@@ -169,60 +166,14 @@ export default class Preloader extends EventEmitter {
     };
 
     recursiveSet(corridor.children, setProperties);
-    this.homePageAppear();
 
     setTimeout(() => {
       this.emit("enablecontrols");
       this.experience.world.corridor.showCorridorOptimized();
       this.experience.world.lighting.showCorridor();
-      this.timeline.to(".arrow-svg-wrapper", { opacity: 1 });
-      this.timeline.to(".toggle-theme", { opacity: 1 });
-      this.timeline.to(".toggle-language", { opacity: 1 }, "<");
     }, 8000);
 
     //element.position.add(hideTranslation)
     //creo que ni estan en la scena
   }
-
-  homePageAppear() {
-    this.homePageApply(this.reappearParameters);
-  }
-
-  homePageApply(callBack) {
-    console.log(this.timeline);
-    this.timeline.to(...callBack(".hero-main-title"), "corridor");
-    this.timeline.to(...callBack(".hero-main-description"), "<");
-    this.timeline.to(...callBack(".hero-second-subheading"), "<");
-    this.timeline.to(...callBack(".second-sub"), "<");
-  }
-  homePageDissappear() {
-    this.homePageApply(this.dissapearParameters);
-  }
-
-  reappearParameters(cssClass, duration = 1, stagger = 0.05, delay = 0) {
-    return [
-      cssClass + " .animatedis",
-      {
-        yPercent: 0,
-        stagger: stagger,
-        duration: duration,
-        delay: delay,
-        ease: "back.out(1.7)",
-      },
-    ];
-  }
-  dissapearParameters(cssClass, duration = 1, stagger = 0.05, delay = 0) {
-    return [
-      cssClass + " .animatedis",
-      {
-        yPercent: 100,
-        stagger: stagger,
-        duration: duration,
-        delay: delay,
-        ease: "back.out(1.7)",
-      },
-    ];
-  }
-
-  
 }

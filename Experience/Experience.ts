@@ -12,14 +12,28 @@ import Time from "./Utils/Time";
 import World from "./World/World";
 import Preloader from "./Controls/Preloader";
 
+type Canvas = Element;
+
 export default class Experience {
   static instance: undefined | Experience;
-  static getInstance = (canvas) => {
-    if (Experience.instance) return Experience.instance;
-    else new Experience(canvas);
-  };
 
-  constructor(canvas) {
+  /** Must be called after being created */
+  static getInstance = () => {
+    return Experience.instance as Experience;
+  };
+  mustRerender: boolean = true;
+  sizes: Sizes;
+  resources: Resources;
+  canvas: Canvas;
+  scene: THREE.Scene;
+  time: Time;
+  camera: Camera;
+  renderer: Renderer;
+  world: World;
+  preloader: Preloader;
+  controls: Controls;
+
+  constructor(canvas: Canvas) {
     Experience.instance = this;
 
     //this.dev = 0;
@@ -28,41 +42,40 @@ export default class Experience {
     this.resources = new Resources(assets);
     this.canvas = canvas;
     this.scene = new THREE.Scene();
-    this.time = new Time();
     this.camera = new Camera();
     this.renderer = new Renderer();
 
     this.world = new World();
     this.preloader = new Preloader();
     this.controls = new Controls();
-    //  this.preloader.on("enablecontrols", () => {
-    //     this.controls = new Controls();
-    //  });
 
-    this.time.on("update", () => {
-      this.camera.update();
-      this.update();
-    });
     this.sizes.on("resize", () => {
       this.resize();
     });
+    console.log("This on constructor", this);
 
-    //this.renderer = new THREE.WebGLRenderer({
-    //    canvas
-    //  })
+    this.setMustRerender(true);
   }
   resize() {
     this.renderer.resize();
     this.camera.resize();
   }
 
-  update() {
-    //this.preloader.update();
-    //this.world.update();
-    this.renderer.update();
-    this.camera.update();
-    this.controls.update();
+  setMustRerender(value: boolean) {
+    this.mustRerender = value;
+    if (value) {
+      this.renderer.setAnimationLoop(() => this.update());
+    } else {
+      this.renderer.setAnimationLoop(null);
+    }
+  }
 
+  update() {
+      //this.preloader.update();
+      //this.world.update();
+      this.controls.update();
+      this.camera.update();
+      this.renderer.update();
     //if (this.controls) {
     //    this.controls.update();
   }

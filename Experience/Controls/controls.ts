@@ -2,7 +2,7 @@ import Experience from "../Experience";
 import * as THREE from "three";
 import ASScroll from "@ashthornton/asscroll";
 import GSAP from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger.js";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 export default class Controls {
   constructor() {
@@ -26,8 +26,7 @@ export default class Controls {
     this.page = document.querySelector(".page");
     this.page.style.visibility = "visible";
 
-    // this.setLanguageControllerHome()
-    this.setThemeController();
+
 
     this.page.style.overflow = "visible";
     GSAP.registerPlugin(ScrollTrigger);
@@ -79,35 +78,10 @@ export default class Controls {
     return asscroll;
   }
 
-  // TODO Should be modified with context
-  setThemeController() {
-    this.theme = {};
-    const toggleButton = (this.theme.toggleButton =
-      document.getElementById("theme-button"));
-    const toggleCircle = (this.theme.toggleCircle = document.getElementById(
-      "theme-button-circle"
-    ));
-    toggleButton.addEventListener("click", () => {
-      toggleCircle.classList.toggle("slide");
-      this.theme.value = this.theme.value === "dark" ? "light" : "dark";
-      document.body.classList.toggle("theme-light");
-      document.body.classList.toggle("theme-dark");
-      this.themeSwitch(this.theme.value);
-    });
-  }
-
-  // TODO Should be modified with redux
-
-  //move
-  themeSwitch(value: Theme) {
-    console.log(this);
-    this.world.themeSwitch(value);
-  }
 
   setScrollController() {
     ScrollTrigger.matchMedia({
       all: () => {
-        this.setProgressBar();
         // },
 
         // "(min-width: 969px)": () => {
@@ -164,47 +138,7 @@ export default class Controls {
     });
   }
 
-  setProgressBar() {
-    //This is for the progress bars at the sides on the sections, it could be done at the section component
-    this.sections = document.querySelectorAll(".section");
-    this.sections.forEach((section) => {
-      this.progressWrapper = section.querySelector(".progress-wrapper");
-      this.progressBar = section.querySelector(".progress-bar");
-
-      if (section.classList.contains("right")) {
-        GSAP.to(section, {
-          borderTopLeftRadius: 10,
-          scrollTrigger: {
-            trigger: section,
-            start: "top bottom",
-            end: "top top",
-            scrub: 0.6,
-          },
-        });
-      } else {
-        GSAP.to(section, {
-          borderBottomRightRadius: 700,
-          scrollTrigger: {
-            trigger: section,
-            start: "bottom bottom",
-            end: "bottom top",
-            scrub: 0.6,
-          },
-        });
-      }
-      GSAP.from(this.progressBar, {
-        scaleY: 0,
-        scrollTrigger: {
-          trigger: section,
-          start: "top top",
-          end: "bottom bottom",
-          scrub: 0.4,
-          pin: this.progressWrapper,
-          pinSpacing: false,
-        },
-      });
-    });
-  }
+ 
 
   setMouseController() {
     window.addEventListener("mousemove", (e) => this.onMouseMove(e)); //TODO anular al principio

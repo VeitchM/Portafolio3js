@@ -1,6 +1,12 @@
 import { EventEmitter } from "events";
 
 export default class Sizes extends EventEmitter {
+    width: number
+    height: number
+    aspect: number
+    pixelRatio: number
+    frustrum: number
+
     _resize(){
         this.width = window.innerWidth;
         this.height = window.innerHeight;

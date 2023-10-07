@@ -1,7 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
 import { Wrapper2, SymbolWrapper, ToggleButton } from "./Switch.styles";
 import { motion } from "framer-motion";
-const SwitchTheme = () => {
+import Switch from "./SwitchButton";
+import Experience from "../../../Experience/Experience";
+const SwitchTheme = (props: { switch: (switched: boolean) => void }) => {
+  const [dark, setDark] = useState(false);
+
+  function onSwitch() {
+    setDark((prev) => {
+      document.body.classList.toggle("theme-light", prev);
+      document.body.classList.toggle("theme-dark", !prev);
+      const experience = Experience.getInstance();
+      experience.world.themeSwitch(!prev ? "dark" : "light");
+      // experience.setMustRerender(!prev);
+
+      return !prev;
+    });
+  }
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -18,9 +34,7 @@ const SwitchTheme = () => {
           </svg>
         </SymbolWrapper>
 
-        <ToggleButton id="theme-button">
-          <div className="toggle-circle" id="theme-button-circle" />
-        </ToggleButton>
+        <Switch switch={dark} onClick={onSwitch} />
         <SymbolWrapper>
           <svg xmlns="http://www.w3.org/2000/svg" height="24" width="24">
             <path

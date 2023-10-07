@@ -23,8 +23,12 @@ const App = () => {
   );
 
   useEffect(() => {
-    new Experience(document.querySelector(".experience-canvas"));
+    const canvas = document.querySelector(".experience-canvas");
+    if (canvas) new Experience(canvas);
+    else console.error("Canvas not found");
   }, []);
+
+  
   console.log("Exectuted before render");
   return (
     <>

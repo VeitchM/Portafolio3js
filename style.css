@@ -76,20 +76,7 @@ button {
   position: relative;
 }
 
-/* Toggle -------------------------------------------------------------*/
-.toggle-circle {
-  position: absolute;
-  left: 6px;
-  border-radius: 50%;
-  width: 20px;
-  height: 20px;
-  background-color: rgb(var(--color-background));
-  transition: all 0.2s ease-in-out;
-}
 
-.slide {
-  left: 31px;
-}
 
 /* Hero -------------------------------------------------------------*/
 
@@ -395,14 +382,7 @@ Progress bars
     left: auto;
   }
 
-  .toggle-circle {
-    width: 14px;
-    height: 14px;
-  }
 
-  .slide {
-    left: 20px;
-  }
 
   .arrow-svg-wrapper {
     bottom: 50px;

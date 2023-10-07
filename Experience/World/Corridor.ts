@@ -1,8 +1,14 @@
 import * as THREE from "three";
 import Experience from "../Experience";
 import recursiveSet from "../Utils/recursiveSet.js";
+import Sizes from "../Utils/Sizes";
+import Resources from "../Utils/Resources";
 
 export default class Corridor {
+
+
+
+
   constructor() {
     this.experience = Experience.getInstance();
     this.scene = this.experience.scene;
@@ -84,7 +90,5 @@ export default class Corridor {
     recursiveSet(this.corridor.scene.children, setProperties);
   }
 
-  resize() {}
 
-  update() {}
 }

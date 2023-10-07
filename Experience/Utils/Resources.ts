@@ -4,8 +4,15 @@ import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader.js";
 import Experience from "../Experience";
 import assets from "./assets";
 
+
+
 export default class Resources extends EventEmitter {
-    constructor(assets) {
+    experience : Experience
+    assets: typeof assets
+
+
+    
+    constructor() {
         super()
         this.experience = Experience.getInstance();
         // this.renderer = this.experience.renderer; // is it neccesary? doesnt looks like

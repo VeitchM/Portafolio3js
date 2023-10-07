@@ -13,6 +13,7 @@ import { useControls } from "leva";
 import Section from "../Section/Section";
 import { Section as section } from "../../../Experience/Languages/content";
 import { Variants, motion, useInView } from "framer-motion";
+// import { PhoneOptimized } from "./PhoneOptimized";
 
 const animationVariants: Variants = {
   appear: {
@@ -30,7 +31,7 @@ function Model(props: {}) {
   // Make it float
   useFrame((state) => {
     const t = state.clock.getElapsedTime();
-    // console.log({ group });
+    // console.log('rendered');
 
     if (group?.current?.rotation) {
       group.current.rotation.x = Math.cos(t / 2) / 20 - 0.05;
@@ -41,15 +42,15 @@ function Model(props: {}) {
   });
   return (
     <group ref={group} dispose={null}>
-      <Phone ref={group} />
+      <Phone  />
     </group>
   );
 }
 
 export default function MobileApp(props: { section: section }) {
-  const { color } = useControls("Test", { color: "#2e13b1" });
+  // const { color } = useControls("Test", { color: "#2e13b1" });
   const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref,{margin: "0px 100px -500px -300px"});
+  const inView = useInView(ref,{margin: "200px 0px -800px"});
   console.log("inView", inView);
 
   return (
@@ -66,8 +67,8 @@ export default function MobileApp(props: { section: section }) {
       >
         <div className="w-screen h-[10%]  bg-gradient-to-t  from-background-variant" />
         <div className="w-full lg:flex h-full relative bg-background-variant">
-          <div className="lg:w-1/2  h-full r">
-            <Canvas camera={{ position: [5, 0, 15], fov: 22 }}>
+          <div className="lg:w-1/2  h-full ">
+            <Canvas  frameloop={inView? 'always' : 'never'} camera={{ position: [5, 0, 15], fov: 22 }}>
               {/* <pointLight position={[20, 10, 10]} intensity={2} /> */}
               <Suspense fallback={null}>
                 <Model />

@@ -58,4 +58,4 @@ export default function Phone(props: { ref?: GroupProps["ref"] }) {
   );
 }
 
-useGLTF.preload("/iphoneForPage.gltf");
+useGLTF.preload("/models/iphoneForPage.gltf");

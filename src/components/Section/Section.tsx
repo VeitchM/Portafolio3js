@@ -67,7 +67,7 @@ const Section = (props: { text: Section; number: number }) => {
 
         <section className="relative text-primary pb-96 border-b-[2px] border-primary pl-[5%]">
           <h1 className="relative">
-            <span className="text-4xl skew-y-[25deg] uppercase block pl-8 origin-left">
+            <span className="text-4xl skew-y-[25deg] w-96 uppercase block pl-8 origin-left">
               {sectionText.title}
             </span>
             <div className="skew-y-[-25deg] block absolute border border-primary h-16 pl-8 top-0 z-50 origin-left max-w-[278px] w-full" />
