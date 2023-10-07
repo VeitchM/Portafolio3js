@@ -1,14 +1,19 @@
 import React, { useRef } from "react";
 import { motion, useScroll, useSpring, useTransform } from "framer-motion";
-import { Section } from "../../../Experience/Languages/content";
+import { Section } from "../../../Experience/Languages/common";
+
+enum SIDE {
+  RIGHT = "right",
+  LEFT = "left",
+}
 
 const Section = (props: { text: Section; number: number }) => {
   const sectionText = props.text;
   const number = props.number;
 
   //Cardinal-move is used to trigger three.js animation
-  const side = number % 2 == 0 ? "right" : "left";
-  const right = side === "right";
+  const side = number % 2 == 0 ? SIDE.LEFT : SIDE.RIGHT;
+  const right = side === SIDE.RIGHT;
 
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({ target: ref });
@@ -45,10 +50,9 @@ const Section = (props: { text: Section; number: number }) => {
 
   return (
     <>
-
       <motion.section
         ref={ref}
-        className={`${side === "right" ? "ml-auto " : "mr-auto "} 
+        className={`${right ? "ml-auto " : "mr-auto "} 
             lg:w-1/2  bg-background-color relative
                 py-[500px] px-[4%] `}
         style={animatedStyle}

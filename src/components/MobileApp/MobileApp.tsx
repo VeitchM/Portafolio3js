@@ -66,7 +66,7 @@ export default function MobileApp(props: { section: section }) {
         className="lg:fixed -top-[10vh] w-screen h-screen  -z-10"
       >
         <div className="w-screen h-[10%]  bg-gradient-to-t  from-background-variant" />
-        <div className="w-full lg:flex h-full relative bg-background-variant">
+        <div className="w-full lg:flex h-full relative bg-background-variant justify-end">
           <div className="lg:w-1/2  h-full ">
             <Canvas  frameloop={inView? 'always' : 'never'} camera={{ position: [5, 0, 15], fov: 22 }}>
               {/* <pointLight position={[20, 10, 10]} intensity={2} /> */}
