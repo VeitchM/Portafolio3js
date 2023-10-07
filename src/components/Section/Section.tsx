@@ -97,13 +97,11 @@ const Section = (props: { text: Section; number: number }) => {
                 <p className="mt-[18px] lg:text-lg">{p}</p>
               ))}
               {subSection.link && (
-                <a
-                  key={subSection.link.show}
-                  href={subSection.link.link}
-                  className="mt-5 text-2xl"
-                >
-                  {subSection.link.show}
-                </a>
+                <div className="hover:animate-pulse transition-all mt-5 text-2xl">
+                  <a key={subSection.link.show} href={subSection.link.link}>
+                    {subSection.link.show}
+                  </a>
+                </div>
               )}
             </>
           ))}
