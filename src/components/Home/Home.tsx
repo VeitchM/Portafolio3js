@@ -67,7 +67,7 @@ export default function Home() {
     // it will be cool a fade out when start to go off screen
     <>
 
-      <section className="w-screen h-screen p-24 pt-4 lg:pt-24">
+      <section className="w-screen h-screen p-4 lg:p-24 pt-4 lg:pt-24">
         <motion.div
           initial="closed"
           className="w-full h-full flex flex-col relative"
@@ -93,7 +93,7 @@ export default function Home() {
           }}
         >
           <AnimatedText ref={nameRef} text={name} className="text-3xl lg:text-7xl" />
-          <AnimatedText className="text-xs lg:text-xl" text={subtitle} />
+          <AnimatedText className="text-xs lg:text-xl " text={subtitle} />
           <AnimatedText
             className="text-xs lg:text-lg absolute bottom-0 right-0"
             text={subtitle2}

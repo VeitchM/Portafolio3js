@@ -12,7 +12,7 @@ export const Wrapper1 = styled.div`
     color: rgb(var(--primary-color));
 
     @media screen and ( max-width: 968px){
-        right: 13px;
+        right: 24px;
         top:10px;
     }
 `;
