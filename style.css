@@ -15,18 +15,13 @@ body {
   font-family: "Ubuntu";
 }
 
-.experience {
-  position: fixed;
-  z-index: -10;
-  /* width: 100vw; */
-  /* height: 50vh; */
-}
 
 .experience-canvas {
   position: fixed;
   z-index: -10;
+  top:0;
   /* width: 100%; */
-  /* height: 100%; */
+  /* height: 300px; */
 }
 
 p,
@@ -68,7 +63,7 @@ button {
 .page {
   z-index: 9999;
   width: 100%;
-  height: 100vh;
+  height: 100%;
   overflow: hidden;
   /* visibility: hidden; */
 }
