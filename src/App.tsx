@@ -47,7 +47,7 @@ const App = () => {
           <AnimationDivider number={2} />
           <Section text={sections[2]} number={3} />
 
-          <AnimationDivider number={3} />
+          <AnimationDivider number={1} />
           {/* <Section text={sections[3]} number={4} /> */}
           <MobileApp section={sections[3]} />
 
