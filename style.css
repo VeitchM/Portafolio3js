@@ -1,4 +1,59 @@
-@import url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@500&display=swap");
+/* @import url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@500&display=swap"); */
+
+
+@font-face {
+  font-family: 'Geist';
+  src: url('/fonts/Geist-UltraBlack.woff2') format('woff2');
+  font-weight: 950; /* UltraBlack */
+}
+
+@font-face {
+  font-family: 'Geist';
+  src: url('/fonts/Geist-Black.woff2') format('woff2');
+  font-weight: 900; /* Black */
+}
+
+@font-face {
+  font-family: 'Geist';
+  src: url('/fonts/Geist-Bold.woff2') format('woff2');
+  font-weight: 700; /* Bold */
+}
+
+@font-face {
+  font-family: 'Geist';
+  src: url('/fonts/Geist-SemiBold.woff2') format('woff2');
+  font-weight: 600; /* SemiBold */
+}
+
+@font-face {
+  font-family: 'Geist';
+  src: url('/fonts/Geist-Medium.woff2') format('woff2');
+  font-weight: 500; /* Medium */
+}
+
+@font-face {
+  font-family: 'Geist';
+  src: url('/fonts/Geist-Regular.woff2') format('woff2');
+  font-weight: 400; /* Regular */
+}
+
+@font-face {
+  font-family: 'Geist';
+  src: url('/fonts/Geist-Light.woff2') format('woff2');
+  font-weight: 300; /* Light */
+}
+
+@font-face {
+  font-family: 'Geist';
+  src: url('/fonts/Geist-UltraLight.woff2') format('woff2');
+  font-weight: 200; /* UltraLight */
+}
+
+@font-face {
+  font-family: 'Geist';
+  src: url('/fonts/Geist-Thin.woff2') format('woff2');
+  font-weight: 100; /* Thin */
+}
 
 @tailwind base;
 @tailwind components;
@@ -12,7 +67,7 @@
 
 html,
 body {
-  font-family: "Ubuntu";
+  font-family: "Geist";
 }
 
 
