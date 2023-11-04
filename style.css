@@ -1,57 +1,56 @@
 /* @import url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@500&display=swap"); */
 
-
 @font-face {
-  font-family: 'Geist';
-  src: url('/fonts/Geist-UltraBlack.woff2') format('woff2');
+  font-family: "Geist";
+  src: url("/fonts/Geist-UltraBlack.woff2") format("woff2");
   font-weight: 950; /* UltraBlack */
 }
 
 @font-face {
-  font-family: 'Geist';
-  src: url('/fonts/Geist-Black.woff2') format('woff2');
+  font-family: "Geist";
+  src: url("/fonts/Geist-Black.woff2") format("woff2");
   font-weight: 900; /* Black */
 }
 
 @font-face {
-  font-family: 'Geist';
-  src: url('/fonts/Geist-Bold.woff2') format('woff2');
+  font-family: "Geist";
+  src: url("/fonts/Geist-Bold.woff2") format("woff2");
   font-weight: 700; /* Bold */
 }
 
 @font-face {
-  font-family: 'Geist';
-  src: url('/fonts/Geist-SemiBold.woff2') format('woff2');
+  font-family: "Geist";
+  src: url("/fonts/Geist-SemiBold.woff2") format("woff2");
   font-weight: 600; /* SemiBold */
 }
 
 @font-face {
-  font-family: 'Geist';
-  src: url('/fonts/Geist-Medium.woff2') format('woff2');
+  font-family: "Geist";
+  src: url("/fonts/Geist-Medium.woff2") format("woff2");
   font-weight: 500; /* Medium */
 }
 
 @font-face {
-  font-family: 'Geist';
-  src: url('/fonts/Geist-Regular.woff2') format('woff2');
+  font-family: "Geist";
+  src: url("/fonts/Geist-Regular.woff2") format("woff2");
   font-weight: 400; /* Regular */
 }
 
 @font-face {
-  font-family: 'Geist';
-  src: url('/fonts/Geist-Light.woff2') format('woff2');
+  font-family: "Geist";
+  src: url("/fonts/Geist-Light.woff2") format("woff2");
   font-weight: 300; /* Light */
 }
 
 @font-face {
-  font-family: 'Geist';
-  src: url('/fonts/Geist-UltraLight.woff2') format('woff2');
+  font-family: "Geist";
+  src: url("/fonts/Geist-UltraLight.woff2") format("woff2");
   font-weight: 200; /* UltraLight */
 }
 
 @font-face {
-  font-family: 'Geist';
-  src: url('/fonts/Geist-Thin.woff2') format('woff2');
+  font-family: "Geist";
+  src: url("/fonts/Geist-Thin.woff2") format("woff2");
   font-weight: 100; /* Thin */
 }
 
@@ -70,11 +69,10 @@ body {
   font-family: "Geist";
 }
 
-
 .experience-canvas {
   position: fixed;
   z-index: -10;
-  top:0;
+  top: 0;
   /* width: 100%; */
   /* height: 300px; */
 }
@@ -108,7 +106,7 @@ button {
 .theme-dark {
   --color-text: var(--white);
   --color-background: 62 66 119;
-  --color-background-variant: 82 86 139 ;
+  --color-background-variant: 82 86 139;
 
   --primary-color: var(--white);
 }
@@ -119,356 +117,12 @@ button {
   z-index: 9999;
   width: 100%;
   height: 100%;
+  /* position: absolute;
+  bottom: 0;
+  top: 0; */
   overflow: hidden;
+  color: rgb(var(--color-text));
+  background-color: aliceblue;
+
   /* visibility: hidden; */
-}
-
-.page-wrapper {
-  color: rgb(var(--color-text));
-  position: relative;
-}
-
-
-
-/* Hero -------------------------------------------------------------*/
-
-.hero {
-  width: 100vw;
-  height: 100vh;
-}
-
-.hero-wrapper {
-  position: relative;
-  height: 100%;
-  width: calc(100% - 160px);
-  margin: 0 auto;
-  max-width: 1500px;
-}
-
-.hero-main {
-  position: absolute;
-  top: 15%;
-  height: 100%;
-  left: 0;
-}
-
-.hero-main-title {
-  font-size: 64px;
-  /* color: rgb(var(--color-text)); */
-}
-
-.hero-main-description {
-  font-size: 18px;
-}
-
-.hero-second {
-  position: absolute;
-  bottom: 20%;
-  right: 15%;
-}
-
-.hero-second-subheading {
-  font-size: 18px;
-  text-transform: uppercase;
-}
-/* 
-Progress bars
-.progress-wrapper{
-  height: 0;
-  width: 12px;
-  z-index: 9999;
-} */
-
-/* .progress-bar-wrapper-left{
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-
-.progress-bar-wrapper-right{
-  position: absolute;
-  top: 0;
-  right: 0;
-} */
-/* 
-.progress-bar{
-  height: 100vh;
-  width: 100%;
-  background-color: var(--primary-color);
-  transform-origin: top center;
-  transform: scaleY(1);
-} */
-
-/* Section Formating -------------------------------------------------------------*/
-/* .section-margin {
-  height: 100px;
-  width: 100%;
-} */
-/* 
-.section {
-  position:relative;
-  width: 50%;
-  padding: 1000px 4%;
-  margin: 0;
-  background-color: var(--color-background);
-  overflow: hidden;
-} */
-/* 
-.left {
-  margin-right: auto;
-  border-top-right-radius: 700px 700px;
-  border-bottom-right-radius: 0px 0px;
-}
-
-.right {
-  margin-left: auto;
-  border-top-left-radius: 700px 700px;
-  border-bottom-left-radius: 0px 0px;
-} */
-
-/* .section-intro-wrapper {
-  position: relative;
-  padding: 20% 5%;
-  color: var(--primary-color);
-  border-bottom: 2px solid currentColor;
-  padding-bottom: 400px;
-} */
-
-/* .section-detail-wrapper {
-  position: relative;
-  padding: 20% 5%;
-} */
-
-/* .section-heading {
-  font-size: 32px;
-  font-weight: 600;
-  line-height: 1.8;
-  margin-top: 64px;
-} */
-
-.link-text {
-  line-height: 1.8;
-  margin-top: 18px;
-  font-size: 24px;
-}
-
-/* Title Decorations -----------------------------------------------------------------*/
-
-.section-title {
-  position: relative;
-}
-
-.section-title-text {
-  display: block;
-  font-size: 40px;
-  transform-origin: left;
-  padding-left: 30px;
-  transform: skewY(25deg);
-  z-index: 5;
-  text-transform: uppercase;
-}
-
-/* .styleOne,
-.styleTwo,
-.styleThree {
-  position: absolute;
-  display: block;
-  width: 100%;
-  height: 60px;
-  max-width: 278px;
-
-  border: 1px solid;
-  transform-origin: left;
-
-
-  transform: skewY(25deg);
-
-}
-
-.styleOne {
-  top: 0px;
-  transform: skewY(-25deg);
-
-}
-
-.styleTwo {
-  top: 80px;
-  background-color: currentColor;
-}
-
-.styleThree {
-  top: 80px;
-  transform: skewY(-25deg);
-
-} */
-
-/* .section-number {
-  position: absolute;
-  bottom: 15px;
-  right: 0;
-  color: var(--primary-color);
-  font-size: 18px;
-} */
-
-@media (max-width: 968px) {
-  .section {
-    width: 100%;
-  }
-
-  .progress-bar-wrapper-left {
-    left: auto;
-    right: 0;
-  }
-}
-
-/* Preloader */
-
-.animatedis {
-  display: inline-block;
-  /* transform: translateY(100%);  */
-}
-
-.intro-text {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: absolute;
-  top: 50%;
-  left: 40%;
-  font-weight: 500;
-  font-size: 16px;
-  color: rgb(var(--color-text));
-  /* transform: translate(-50%, -50%); */
-}
-
-.arrow-svg-wrapper {
-  position: absolute;
-  bottom: 20px;
-  left: 50%;
-  color: rgb(var(--color-text));
-  transform: translate(-50%, -50%);
-  animation: bounce 0.5s ease-in alternate infinite;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  opacity: 0;
-}
-
-@keyframes bounce {
-  0% {
-    transform: translateY(0);
-  }
-
-  100% {
-    transform: translateY(8px);
-  }
-}
-
-/* Preloader */
-.preloader {
-  background-color: var(--color-background-light);
-  width: 100%;
-  height: 100vh;
-  position: fixed;
-  opacity: 1;
-  z-index: 99999999999999999;
-}
-
-.preloader-wrapper {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 100%;
-}
-
-.loading {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.circle {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  margin: 6px;
-  background-color: var(--primary-color);
-  animation: load 1s ease-in-out infinite;
-}
-
-.circle:nth-child(2) {
-  animation-delay: 0.1s;
-}
-
-.circle:nth-child(3) {
-  animation-delay: 0.2s;
-}
-
-@keyframes load {
-  0% {
-    transform: translateY(0);
-  }
-
-  20% {
-    transform: translateY(-12px);
-  }
-
-  40% {
-    transform: translateY(0);
-  }
-}
-
-.hidden {
-  visibility: hidden;
-}
-
-/* Media Queries */
-
-@media (max-width: 968px) {
-  .section {
-    width: 100%;
-  }
-  .progress-bar-wrapper-left {
-    right: 0;
-    left: auto;
-  }
-
-
-
-  .arrow-svg-wrapper {
-    bottom: 50px;
-  }
-
-  .hero-main {
-    top: 10%;
-  }
-
-  .hero-second {
-    bottom: 15%;
-    right: 5%;
-  }
-  .hero-wrapper {
-    width: calc(100% - 60px);
-  }
-  .hero-main-title {
-    font-size: 40px;
-  }
-
-  .hero-main-description {
-    font-size: 12px;
-  }
-  .hero-second-subheading {
-    font-size: 18px;
-  }
-}
-
-h1 {
-  font-size: 80px;
-}
-
-@media (max-width: 968px) {
-  h1 {
-    font-size: 40px;
-  }
 }

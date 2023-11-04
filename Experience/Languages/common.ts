@@ -1,4 +1,6 @@
 export class tupleIdText {
+  id:string;
+  text:string
   constructor(id, text) {
     this.id = id;
     this.text = text;
@@ -10,7 +12,7 @@ export class tupleIdText {
 }
 /**This function creates an object of the form {title: str, content: {[subtitle:str,text:str[],link:{kind:link, show:str, link:str}}} from Example: 'Josefina',[['Todos los dias','TodosLosMartes','Todos los jueves'],
 ['OtrosDias','OtrosMiercos', "Veredas",Section.link('yo','matiasveitch@gmail.com')]]*/
-function sectContent(title, content) {
+function sectContent(title:string, content) {
   let allcontent = [];
   for (let j in content) {
     let subSection = content[j];

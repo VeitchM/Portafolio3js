@@ -30,13 +30,7 @@ export default class World extends EventEmitter {
     this.lighting.themeSwitch(value);
   }
 
-  /** Use setFunc Callback on each child of children and in the children of child recursevely */
-  recursiveSet(children, setFunc) {
-    children.forEach((child) => {
-      setFunc(child);
-      if (child.children) recursiveSet(child.children, setFunc);
-    });
-  }
+ 
 
   background() {
     const planeGeometry = new THREE.CircleGeometry(80, 4);

@@ -10,6 +10,7 @@ import Home from "./components/Home/Home";
 import LanguageContext from "./language";
 import MobileApp from "./components/MobileApp/MobileApp";
 import AnimationDivider from "./components/AnimationDivider";
+import Corridor from "./components/Corridor/Corridor";
 
 const ThemeContext = createContext<"light" | "dark">("light");
 
@@ -35,6 +36,7 @@ const App = () => {
       <ThemeContext.Provider value={"light"}>
         <LanguageContext.Provider value={language}>
           {/* <div className="mt-24"></div> */}
+          <Corridor/>
           <Home />
           <SwitchTheme />
           <SwitchLanguage setLanguage={setLanguage} language={language} />

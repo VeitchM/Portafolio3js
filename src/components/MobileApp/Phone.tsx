@@ -6,8 +6,10 @@ import { useGLTF, useVideoTexture } from "@react-three/drei";
 import { GroupProps } from "@react-three/fiber";
 
 export default function Phone(props: { ref?: GroupProps["ref"] }) {
-  const { nodes, materials } = useGLTF("/models/iphoneForPage.gltf") as any;
-
+  const gltf = useGLTF("/models/iphoneForPage.gltf") as any;
+  console.log("Phone gltf",gltf);
+  
+  const { nodes, materials } = gltf;
   const texture = useVideoTexture("/videos/pastechPT.webm");
   // const texture = useVideoTexture("/videos/nexum.mp4");
   console.log({ texture });

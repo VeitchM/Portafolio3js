@@ -8,7 +8,6 @@ import * as ReactDOMClient from 'react-dom/client';
 
 
 
-const root = ReactDOMClient.createRoot(document.getElementById('reactSections'));
+const root = ReactDOMClient.createRoot(document.getElementById('root')!);
 
 root.render(<App/>);
-const experience = new Experience(document.querySelector(".experience-canvas"));
