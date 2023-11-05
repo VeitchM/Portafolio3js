@@ -1,24 +1,50 @@
-import { useThree } from "@react-three/fiber";
+import { useFrame, useThree } from "@react-three/fiber";
+import { gsap } from "gsap";
 import { useControls } from "leva";
 import { useEffect } from "react";
 import * as React from "react";
-import { Vector3 } from "three";
+import { Object3D, Vector3 } from "three";
+
+const timeline = gsap.timeline()
 
 export default function Camera() {
   const Three = useThree();
   const controls = useControls({
     frame: { options: arrayFramesNames },
+  
   });
   useEffect(() => {
     const camera = Three.camera;
-    const intro = frames[controls.frame];
-    camera.position.copy(intro.position);
-    camera.lookAt(intro.target);
-    Three.camera.zoom = intro.zoom;
-    Three.camera.updateProjectionMatrix();
-    console.log("THREE CAMERA", Three.camera);
-  });
+    const frame = frames[controls.frame];
+    console.log("Frame",frame);
+    
+    timeline.to(camera.position,{...frame.position,duration:3},"moveCamera")
+    // camera.position.copy(frame.position);
+    const object = new Object3D()
+    object.position.copy(frame.position);
+    // object.lookAt(frame.target)
+    // camera.lookAt(frame.target)
+    // camera.rotation.copy(object.rotation)
+    console.log("Object and camera",camera.rotation,object.rotation);
+    
+    // timeline.to(camera.rotation,{...object.rotation,duration:3},"moveCamera")
+    timeline.to(camera,{zoom:frame.zoom,duration:3},"moveCamera").then(()=>{
+      camera.lookAt(frame.target)
+      Three.camera.updateProjectionMatrix();
 
+    })
+
+    // Three.camera.zoom = frame.zoom;
+    console.log("THREE CAMERA", Three.camera);
+  },[controls.frame]);
+
+  useFrame(()=>{
+// console.log("Use frame");
+console.log(Three.camera.zoom);
+
+    Three.camera.updateProjectionMatrix();
+  })
+  
   return <></>;
 }
 
@@ -30,14 +56,15 @@ enum FramesNames {
   Balcony,
 }
 
-const arrayFramesNames  = 
+const arrayFramesNames  = extractKeysFromEnum(FramesNames)
 
-Object.keys(FramesNames).filter((key)=>isNaN(Number(key))) as  (keyof typeof FramesNames)[];
+// Object.keys(FramesNames).filter((key)=>isNaN(Number(key))) as  (keyof typeof FramesNames)[];
 console.log("Object keys",Object.keys(FramesNames));
+/** Move to utils, it gets only the string keys of a enum (object.keys return also the inverted indexes) */
+function extractKeysFromEnum<T>(enumObj:{[key in keyof T]:string | number}) : (keyof T)[]{
+  return Object.keys(enumObj).filter((key)=>isNaN(Number(key)))  as (keyof T)[];
 
-// function extractKeysFromEnum<T>(enum:{[key in keyof T]:string}{
-
-// }
+}
 
 console.log("Object entries",Object.entries(FramesNames));
 
@@ -85,7 +112,7 @@ function frameIndex(name: keyof typeof FramesNames) {
   return FramesNames[name];
 }
 
-/** It's update the actual frame from the transition class attribute */
+/** It updates the actual frame from the transition class attribute */
 //     function updateActualFrame() {
 //         if(!freeCam){
 
