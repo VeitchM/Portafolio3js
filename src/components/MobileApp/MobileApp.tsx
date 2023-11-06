@@ -80,6 +80,7 @@ export default function MobileApp(props: { section: section }) {
                 blur={2}
                 far={4.5}
               />
+              <OrbitControls/>
 
               {/* <OrbitControls
           enablePan={false}

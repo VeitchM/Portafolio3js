@@ -1,51 +1,84 @@
+import { OrbitControls } from "@react-three/drei";
 import { useFrame, useThree } from "@react-three/fiber";
 import { gsap } from "gsap";
 import { useControls } from "leva";
-import { useEffect } from "react";
-import * as React from "react";
-import { Object3D, Vector3 } from "three";
-
-const timeline = gsap.timeline()
+import { useEffect, useRef } from "react";
+import {
+  InterpolateSmooth,
+  Object3D,
+  OrthographicCamera,
+  Vector3,
+} from "three";
 
 export default function Camera() {
+  const cameraRef = useRef<OrthographicCamera>(null);
   const Three = useThree();
   const controls = useControls({
     frame: { options: arrayFramesNames },
-  
   });
+
+  useEffect(() => {
+    const init = frames["Intro"];
+    console.log("init", init);
+    Three.camera.far = 80;
+    Three.camera.near = 0.0001;
+  }, []);
+
   useEffect(() => {
     const camera = Three.camera;
     const frame = frames[controls.frame];
-    console.log("Frame",frame);
-    
-    timeline.to(camera.position,{...frame.position,duration:3},"moveCamera")
+    const timeline = gsap.timeline();
     // camera.position.copy(frame.position);
-    const object = new Object3D()
+    const object = new Object3D();
     object.position.copy(frame.position);
-    // object.lookAt(frame.target)
-    // camera.lookAt(frame.target)
-    // camera.rotation.copy(object.rotation)
-    console.log("Object and camera",camera.rotation,object.rotation);
-    
-    // timeline.to(camera.rotation,{...object.rotation,duration:3},"moveCamera")
-    timeline.to(camera,{zoom:frame.zoom,duration:3},"moveCamera").then(()=>{
-      camera.lookAt(frame.target)
-      Three.camera.updateProjectionMatrix();
+    object.lookAt(frame.target);
 
-    })
+    timeline.to(
+      camera.rotation,
+      {
+        x: -Math.PI + object.rotation.x,
+        y: -object.rotation.y,
+        z: Math.PI - object.rotation.z,
+        duration: 3,
+      },
+      "moveCamera"
+    );
+    timeline.to(
+      camera.position,
+      { ...frame.position, duration: 3 },
+      "moveCamera"
+    );
+    timeline
+      .to(camera, { zoom: frame.zoom, duration: 3 }, "moveCamera")
+      .then(() => {
+        console.log(
+          "Camera and object  Pos",
+          ...camera.rotation,
+          ...object.rotation
+        );
+
+        // camera.lookAt(frame.target);
+        console.log(...camera.rotation, ...object.rotation);
+
+        // Three.camera.updateProjectionMatrix();
+      });
 
     // Three.camera.zoom = frame.zoom;
     console.log("THREE CAMERA", Three.camera);
-  },[controls.frame]);
+  }, [controls.frame, Three.camera]);
 
-  useFrame(()=>{
-// console.log("Use frame");
-console.log(Three.camera.zoom);
+  useFrame(() => {
+    // // console.log("Use frame");
+    // console.log(Three.camera.zoom);
+    // console.log(...Three.camera.rotation);
 
     Three.camera.updateProjectionMatrix();
-  })
-  
-  return <></>;
+  });
+  //I could add a connditional renderer of an object that has updateProjectionmatrix
+  return (
+    // <orthographicCamera attach={'camera'} ref={cameraRef} />
+    <></>
+  );
 }
 
 enum FramesNames {
@@ -56,20 +89,22 @@ enum FramesNames {
   Balcony,
 }
 
-const arrayFramesNames  = extractKeysFromEnum(FramesNames)
+export const arrayFramesNames = extractKeysFromEnum(FramesNames);
 
 // Object.keys(FramesNames).filter((key)=>isNaN(Number(key))) as  (keyof typeof FramesNames)[];
-console.log("Object keys",Object.keys(FramesNames));
+console.log("Object keys", Object.keys(FramesNames));
 /** Move to utils, it gets only the string keys of a enum (object.keys return also the inverted indexes) */
-function extractKeysFromEnum<T>(enumObj:{[key in keyof T]:string | number}) : (keyof T)[]{
-  return Object.keys(enumObj).filter((key)=>isNaN(Number(key)))  as (keyof T)[];
-
+function extractKeysFromEnum<T>(enumObj: {
+  [key in keyof T]: string | number;
+}): (keyof T)[] {
+  return Object.keys(enumObj).filter((key) =>
+    isNaN(Number(key))
+  ) as (keyof T)[];
 }
 
-console.log("Object entries",Object.entries(FramesNames));
+console.log("Object entries", Object.entries(FramesNames));
 
-console.log("Array frames names",arrayFramesNames);
-
+console.log("Array frames names", arrayFramesNames);
 
 type Frame = { position: Vector3; target: Vector3; zoom: number };
 

@@ -7,12 +7,18 @@ import "../style.css";
 
 import testSect from "../Experience/Languages/content";
 import Home from "./components/Home/Home";
-import LanguageContext from "./language";
+import LanguageContext from "./contexts/language";
 import MobileApp from "./components/MobileApp/MobileApp";
 import AnimationDivider from "./components/AnimationDivider";
 import Corridor from "./components/Corridor/Corridor";
-
-const ThemeContext = createContext<"light" | "dark">("light");
+import ThemeContext, {
+  Themes,
+  createTheme,
+  useTheme,
+} from "./providers/ThemeProvider";
+import { PresentationControls } from "@react-three/drei";
+import ThemeProvider from "./providers/ThemeProvider";
+import Background from "./components/Background";
 
 type Languages = "es" | "en";
 
@@ -23,39 +29,38 @@ const App = () => {
     [language]
   );
 
-  useEffect(() => {
-    const canvas = document.querySelector(".experience-canvas");
-    if (canvas) new Experience(canvas);
-    else console.error("Canvas not found");
-  }, []);
+  // useEffect(() => {
+  //   const canvas = document.querySelector(".experience-canvas");
+  //   if (canvas) new Experience(canvas);
+  //   else console.error("Canvas not found");
+  // }, []);
 
-  
   console.log("Exectuted before render");
   return (
     <>
-      <ThemeContext.Provider value={"light"}>
+      <ThemeProvider>
         <LanguageContext.Provider value={language}>
-          {/* <div className="mt-24"></div> */}
-          <Corridor/>
-          <Home />
-          <SwitchTheme />
-          <SwitchLanguage setLanguage={setLanguage} language={language} />
-          <AnimationDivider number={0} />
-          <Section text={sections[0]} number={1} />
+          <Background>
+            <SwitchLanguage setLanguage={setLanguage} language={language} />
+            <SwitchTheme />
 
-          <AnimationDivider number={1} />
-          <Section text={sections[1]} number={2} />
+            <Corridor />
+            <Home />
+            <AnimationDivider number={0} />
+            <Section text={sections[0]} number={1} />
 
-          <AnimationDivider number={2} />
-          <Section text={sections[2]} number={3} />
+            <AnimationDivider number={1} />
+            <Section text={sections[1]} number={2} />
 
-          <AnimationDivider number={1} />
-          {/* <Section text={sections[3]} number={4} /> */}
-          <MobileApp section={sections[3]} />
+            <AnimationDivider number={2} />
+            <Section text={sections[2]} number={3} />
 
-          <div className=""> </div>
+            <AnimationDivider number={1} />
+            {/* <Section text={sections[3]} number={4} /> */}
+            <MobileApp section={sections[3]} />
+          </Background>
         </LanguageContext.Provider>
-      </ThemeContext.Provider>
+      </ThemeProvider>
     </>
   );
 };

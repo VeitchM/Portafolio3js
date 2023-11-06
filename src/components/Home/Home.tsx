@@ -54,7 +54,6 @@ export default function Home() {
     );
   }
 
-  const nameRef = useRef(null);
 
   return (
     // it will be cool a fade out when start to go off screen
@@ -90,7 +89,6 @@ export default function Home() {
           }}
         >
           <AnimatedText
-            ref={nameRef}
             text={name}
             className="text-3xl lg:text-7xl"
           />
@@ -108,14 +106,12 @@ export default function Home() {
 function AnimatedText(props: {
   text: string;
   className?: string;
-  ref?: MutableRefObject<null>;
 }) {
 
 
   useEffect(() => {}, [props.text]);
   return (
     <div
-      ref={props.ref}
       className={`whitespace-pre-wrap flex ${props.className}`}
     >
       {props.text.split("").map((letter, index) => {

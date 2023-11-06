@@ -1,20 +1,18 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Wrapper2, SymbolWrapper, ToggleButton } from "./Switch.styles";
 import { motion } from "framer-motion";
 import Switch from "./SwitchButton";
 import Experience from "../../../Experience/Experience";
-const SwitchTheme = (props: { switch: (switched: boolean) => void }) => {
-  const [dark, setDark] = useState(false);
+import ThemeContext, { Themes, useTheme, useChangeTheme } from "../../providers/ThemeProvider";
+const SwitchTheme = () => {
+  const theme = useTheme()
+  const setTheme = useChangeTheme()
 
   function onSwitch() {
-    setDark((prev) => {
-      document.body.classList.toggle("theme-light", prev);
-      document.body.classList.toggle("theme-dark", !prev);
-      const experience = Experience.getInstance();
-      experience.world.themeSwitch(!prev ? "dark" : "light");
-      // experience.setMustRerender(!prev);
-
-      return !prev;
+    setTheme((prev) => {
+      document.body.classList.toggle("theme-light", prev !== Themes.light);
+      document.body.classList.toggle("theme-dark", prev !== Themes.dark);
+      return prev === Themes.light ? Themes.dark : Themes.light;
     });
   }
 
@@ -34,7 +32,7 @@ const SwitchTheme = (props: { switch: (switched: boolean) => void }) => {
           </svg>
         </SymbolWrapper>
 
-        <Switch switch={dark} onClick={onSwitch} />
+        <Switch switch={theme === Themes.dark} onClick={onSwitch} />
         <SymbolWrapper>
           <svg xmlns="http://www.w3.org/2000/svg" height="24" width="24">
             <path

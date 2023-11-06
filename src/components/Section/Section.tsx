@@ -7,7 +7,7 @@ enum SIDE {
   LEFT = "left",
 }
 
-const Section = (props: { text: Section; number: number }) => {
+const section = (props: { text: Section; number: number }) => {
   const sectionText = props.text;
   const number = props.number;
 
@@ -44,7 +44,7 @@ const Section = (props: { text: Section; number: number }) => {
         borderBottomRightRadius: radiusBottom,
       };
 
-  console.log(scrollYProgress.get(), scaleY.get());
+  // console.log(scrollYProgress.get(), scaleY.get());
 
   // const transform = useTransform()
 
@@ -86,15 +86,15 @@ const Section = (props: { text: Section; number: number }) => {
 
         <section className="relative pr-[20%] pl-[5%] lg:font-[18px] lg:pr-[90px]">
           {sectionText.content.map((subSection) => (
-            <>
+            <React.Fragment  key={subSection.subtitle}>
               <h3
-                key={subSection.subtitle}
+               
                 className="mt-16 text-3xl font-[600]"
               >
                 {subSection.subtitle}
               </h3>
-              {subSection.text.map((p) => (
-                <p className="mt-[18px] lg:text-lg">{p}</p>
+              {subSection.text.map((p,index) => (
+                <p key={index} className="mt-[18px] lg:text-lg">{p}</p>
               ))}
               {subSection.link && (
                 <div className="hover:animate-pulse transition-all mt-5 text-2xl">
@@ -103,7 +103,7 @@ const Section = (props: { text: Section; number: number }) => {
                   </a>
                 </div>
               )}
-            </>
+            </React.Fragment >
           ))}
         </section>
       </motion.section>
@@ -111,4 +111,4 @@ const Section = (props: { text: Section; number: number }) => {
   );
 };
 
-export default Section;
+export default section;

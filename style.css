@@ -122,7 +122,7 @@ button {
   top: 0; */
   overflow: hidden;
   color: rgb(var(--color-text));
-  background-color: aliceblue;
+  /* background-color: aliceblue; */
 
   /* visibility: hidden; */
 }

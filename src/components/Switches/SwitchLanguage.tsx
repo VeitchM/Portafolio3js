@@ -1,7 +1,7 @@
 import React, { Dispatch, useState } from "react";
 import { Wrapper1, SymbolWrapper, ToggleButton } from "./Switch.styles";
 import { useLanguage } from "../../hooks/useLanguage";
-import { Language, Languages } from "../../language";
+import { Language, Languages } from "../../contexts/language";
 import { motion } from "framer-motion";
 import Switch from "./SwitchButton";
 const SwitchLanguage = (props: {
